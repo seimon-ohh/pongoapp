@@ -50,50 +50,59 @@ class GamemodeCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider.builder(
-      itemCount: gamemodes.length,
-      itemBuilder: (BuildContext context, int index, int pageViewIndex) {
-        return Container(
-          margin: EdgeInsets.symmetric(horizontal: 8.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.0),
-            color: Color.fromARGB(255, 42, 42, 42),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                gamemodes[index]['image'],
-                height: 190,
-              ),
-              Text(
-                gamemodes[index]['title'],
-                style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          CarouselSlider.builder(
+            itemCount: gamemodes.length,
+            itemBuilder: (BuildContext context, int index, int pageViewIndex) {
+              return Container(
+                margin: EdgeInsets.symmetric(horizontal: 8.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  color: Color.fromARGB(255, 42, 42, 42),
                 ),
-              ),
-              SizedBox(height: 16.0),
-              Text(
-                gamemodes[index]['description'],
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.white,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      gamemodes[index]['image'],
+                      height: 180,
+                    ),
+                    Text(
+                      gamemodes[index]['title'],
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: 16.0),
+                    Text(
+                      gamemodes[index]['description'],
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 16.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
+              );
+            },
+            options: CarouselOptions(
+              height: 380.0,
+              autoPlay: false,
+              autoPlayInterval: Duration(seconds: 3),
+              viewportFraction: 0.8,
+              enlargeCenterPage: true,
+            ),
           ),
-        );
-      },
-      options: CarouselOptions(
-        height: 380.0,
-        autoPlay: false,
-        autoPlayInterval: Duration(seconds: 3),
-        viewportFraction: 0.8,
-        enlargeCenterPage: true,
-      ),
-    );
+          ElevatedButton(
+            onPressed: () {},
+            child: Text("Start"),
+          )
+        ]);
   }
 }
