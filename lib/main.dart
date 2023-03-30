@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './Gamemodes.dart';
+import 'screens/gamemode_screen.dart';
 
 void main() => runApp(BeerPongApp());
 
@@ -29,25 +29,31 @@ class BeerPongApp extends StatelessWidget {
                 height: 200,
               ),
               SizedBox(height: 20),
-              ElevatedButton(
+              Builder(builder: (BuildContext innerContext) {
+                return ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(innerContext, GamemodeScreen.routeName);
+                  },
+                  child: Text('Go to Second Screen'),
+                );
+              }),
+
+              /* ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return Gamemodes();
-                  }));
+                  Navigator.of(context).pushNamed(GamemodeScreen.routeName);
                 },
                 child: Text('Spiel starten'),
               ),
               SizedBox(height: 10),
               ElevatedButton(
-                onPressed: () {
-                  // Hier kann die Aktion hinzugefügt werden, um die Spielregeln anzuzeigen
-                },
+                onPressed: () {},
                 child: Text('Premium-Version kaufen'),
-              ),
+              ),*/
             ],
           ),
         ),
       ),
+      routes: {GamemodeScreen.routeName: (ctx) => GamemodeScreen()},
     );
   }
 }
