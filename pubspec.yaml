@@ -64,6 +64,12 @@ flutter:
   assets:
     - assets/images/classic.png    
     - assets/images/Pongo.png    
+    - assets/images/level.png   
+    - assets/images/tauziehen.png    
+    - assets/images/tictactoe.png    
+    - assets/images/change.png    
+    - assets/images/dart.png    
+    - assets/images/memory.png    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
