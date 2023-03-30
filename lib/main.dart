@@ -9,7 +9,7 @@ class BeerPongApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pongo Startseite',
       theme:
-          ThemeData(scaffoldBackgroundColor: Color.fromARGB(255, 44, 35, 35)),
+          ThemeData(scaffoldBackgroundColor: Color.fromARGB(255, 55, 50, 50)),
       home: Scaffold(
         body: Center(
           child: Column(

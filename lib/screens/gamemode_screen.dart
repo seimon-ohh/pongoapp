@@ -13,7 +13,8 @@ class GamemodeScreen extends StatelessWidget {
           ThemeData(scaffoldBackgroundColor: Color.fromARGB(255, 55, 50, 50)),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Spielmodus auswählen'),
+          title: Text("Gamemode"),
+          backgroundColor: Colors.black12,
         ),
         body: Center(
           child: GamemodeCarousel(),
