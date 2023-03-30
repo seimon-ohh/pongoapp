@@ -9,6 +9,8 @@ class GamemodeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Spielmodus auswählen',
+      theme:
+          ThemeData(scaffoldBackgroundColor: Color.fromARGB(255, 55, 50, 50)),
       home: Scaffold(
         appBar: AppBar(
           title: Text('Spielmodus auswählen'),

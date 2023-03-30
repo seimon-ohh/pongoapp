@@ -8,10 +8,9 @@ class BeerPongApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Pongo Startseite',
+      theme:
+          ThemeData(scaffoldBackgroundColor: Color.fromARGB(255, 44, 35, 35)),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Pongo'),
-        ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -19,9 +18,9 @@ class BeerPongApp extends StatelessWidget {
               Text(
                 'Willkommen bei Pongo!',
                 style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
               SizedBox(height: 20),
               Image.asset(
