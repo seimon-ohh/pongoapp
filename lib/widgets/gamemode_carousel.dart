@@ -10,32 +10,32 @@ class GamemodeCarousel extends StatelessWidget {
           'Macht euch auf was gefasst! So habt ihr Bierpong noch nie erlebt! Wir zeigen euch, was bei einem Bierpong-Match alles möglich ist.',
     },
     {
-      'image': '/assets/images/classic.png',
+      'image': 'assets/images/tauziehen.png',
       'title': 'Tauziehen',
       'description': 'Description for Gamemode 2',
     },
     {
-      'image': '/assets/images/classic.png',
+      'image': 'assets/images/tictactoe.png',
       'title': 'Tic Tac Toe',
       'description': 'Description for Gamemode 3',
     },
     {
-      'image': '/assets/images/classic.png',
+      'image': 'assets/images/level.png',
       'title': 'Level',
       'description': 'Description for Gamemode 3',
     },
     {
-      'image': '/assets/images/classic.png',
+      'image': 'assets/images/change.png',
       'title': 'Change',
       'description': 'Description for Gamemode 3',
     },
     {
-      'image': '/assets/images/classic.png',
+      'image': 'assets/images/memory.png',
       'title': 'Memory',
       'description': 'Description for Gamemode 3',
     },
     {
-      'image': '/assets/images/classic.png',
+      'image': 'assets/images/dart.png',
       'title': 'Darts',
       'description': 'Description for Gamemode 3',
     },
@@ -58,7 +58,7 @@ class GamemodeCarousel extends StatelessWidget {
             children: [
               Image.asset(
                 gamemodes[index]['image'],
-                height: 50,
+                height: 80,
               ),
               Text(
                 gamemodes[index]['title'],
@@ -82,7 +82,7 @@ class GamemodeCarousel extends StatelessWidget {
         );
       },
       options: CarouselOptions(
-        height: 200.0,
+        height: 300.0,
         autoPlay: false,
         autoPlayInterval: Duration(seconds: 3),
         viewportFraction: 0.8,
