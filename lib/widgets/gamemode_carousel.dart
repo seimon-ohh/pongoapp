@@ -12,32 +12,38 @@ class GamemodeCarousel extends StatelessWidget {
     {
       'image': 'assets/images/tauziehen.png',
       'title': 'Tauziehen',
-      'description': 'Description for Gamemode 2',
+      'description':
+          'Triffst du den angezeigten Bescher, wird dieser in deiene Richtung verschoben. Es gewinnt derjenige, der es schafft den Becher komplett auf seine eigene Seite wandern zu lassen.',
     },
     {
       'image': 'assets/images/tictactoe.png',
       'title': 'Tic Tac Toe',
-      'description': 'Description for Gamemode 3',
+      'description':
+          'Es wird abwechselnd geworfen. Wer zuerst 3 Becher in einer Reihe getroffen hat, gewinnt.',
     },
     {
       'image': 'assets/images/level.png',
       'title': 'Level',
-      'description': 'Description for Gamemode 3',
+      'description':
+          'Es gibt drei Level mit unterschiedlichen Aufstellungen. Jedes Level besteht aus drei Bechern, die getroffen werden müssen. Wer zuerst alle 3 Level absolviert hat, gewinnt.',
     },
     {
       'image': 'assets/images/change.png',
       'title': 'Change',
-      'description': 'Description for Gamemode 3',
+      'description':
+          'Werden auf einer Seite 2 Becher getroffen, stellen sich die Aufstellunen beider Seiten automatisch um.',
     },
     {
       'image': 'assets/images/memory.png',
       'title': 'Memory',
-      'description': 'Description for Gamemode 3',
+      'description':
+          'Es gibt acht verschiedene Paare. Mit dem Treffen eines Bechers deckt man das versteckte Symbol auf. Wer als erstes mehr als vier Paare aufdeckt, hat gewonnen.',
     },
     {
       'image': 'assets/images/dart.png',
       'title': 'Darts',
-      'description': 'Description for Gamemode 3',
+      'description':
+          'Jeder Becher bringt eine andere Anzahl an Punkten. trifft man einen Becher werden diese Punkte abgezogen. Wer als erstes genau bei null ist, hat gewonnen.',
     },
     // Add more gamemodes as needed
   ];

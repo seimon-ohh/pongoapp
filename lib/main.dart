@@ -33,21 +33,14 @@ class BeerPongApp extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(innerContext, GamemodeScreen.routeName);
                   },
-                  child: Text('Go to Second Screen'),
+                  child: Text('Start Game'),
                 );
               }),
-
-              /* ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(GamemodeScreen.routeName);
-                },
-                child: Text('Spiel starten'),
-              ),
               SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {},
                 child: Text('Premium-Version kaufen'),
-              ),*/
+              ),
             ],
           ),
         ),
