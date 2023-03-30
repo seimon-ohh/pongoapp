@@ -1,4 +1,0 @@
-#Fri Mar 24 11:06:02 CET 2023
-base.0=C\:\\Users\\felix\\OneDrive\\Desktop\\Pongo\\pongoapp\\build\\app\\intermediates\\dex\\profile\\mergeDexProfile\\classes.dex
-renamed.0=classes.dex
-path.0=classes.dex

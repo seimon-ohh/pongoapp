@@ -4,7 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 class GamemodeCarousel extends StatelessWidget {
   final List<Map<String, dynamic>> gamemodes = [
     {
-      'image': '/assets/images/classic.png',
+      'image': 'assets/images/classic.png',
       'title': 'Classic',
       'description':
           'Macht euch auf was gefasst! So habt ihr Bierpong noch nie erlebt! Wir zeigen euch, was bei einem Bierpong-Match alles möglich ist.',
@@ -56,7 +56,10 @@ class GamemodeCarousel extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(''),
+              Image.asset(
+                gamemodes[index]['image'],
+                height: 50,
+              ),
               Text(
                 gamemodes[index]['title'],
                 style: TextStyle(
