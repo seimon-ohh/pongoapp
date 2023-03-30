@@ -64,7 +64,7 @@ class GamemodeCarousel extends StatelessWidget {
             children: [
               Image.asset(
                 gamemodes[index]['image'],
-                height: 80,
+                height: 190,
               ),
               Text(
                 gamemodes[index]['title'],
@@ -88,7 +88,7 @@ class GamemodeCarousel extends StatelessWidget {
         );
       },
       options: CarouselOptions(
-        height: 300.0,
+        height: 380.0,
         autoPlay: false,
         autoPlayInterval: Duration(seconds: 3),
         viewportFraction: 0.8,
