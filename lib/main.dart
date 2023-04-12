@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pongoapp/models/teammember.dart';
+import 'package:pongoapp/screens/teamlist_screen.dart';
 import 'screens/gamemode_screen.dart';
 
 void main() => runApp(BeerPongApp());
@@ -31,7 +33,8 @@ class BeerPongApp extends StatelessWidget {
               Builder(builder: (BuildContext innerContext) {
                 return ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(innerContext, GamemodeScreen.routeName);
+                    Navigator.of(innerContext)
+                        .pushNamed(GamemodeScreen.routeName);
                   },
                   child: Text('Start Game'),
                 );
@@ -45,7 +48,10 @@ class BeerPongApp extends StatelessWidget {
           ),
         ),
       ),
-      routes: {GamemodeScreen.routeName: (ctx) => GamemodeScreen()},
+      routes: {
+        GamemodeScreen.routeName: (ctx) => GamemodeScreen(),
+        TeamListsWidget.routeName: (ctx) => TeamListsWidget()
+      },
     );
   }
 }

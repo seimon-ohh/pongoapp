@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:pongoapp/screens/teamlist_screen.dart';
 
 class GamemodeCarousel extends StatelessWidget {
   final List<Map<String, dynamic>> gamemodes = [
@@ -99,10 +100,6 @@ class GamemodeCarousel extends StatelessWidget {
               enlargeCenterPage: true,
             ),
           ),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text("Start"),
-          )
         ]);
   }
 }

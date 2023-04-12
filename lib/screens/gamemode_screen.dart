@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:pongoapp/screens/teamlist_screen.dart';
 import 'package:pongoapp/widgets/gamemode_carousel.dart';
 
 class GamemodeScreen extends StatelessWidget {
@@ -17,7 +18,21 @@ class GamemodeScreen extends StatelessWidget {
           backgroundColor: Colors.black12,
         ),
         body: Center(
-          child: GamemodeCarousel(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GamemodeCarousel(),
+              SizedBox(
+                height: 40,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, TeamListsWidget.routeName);
+                },
+                child: Text("Start"),
+              )
+            ],
+          ),
         ),
       ),
     );
