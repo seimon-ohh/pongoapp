@@ -23,7 +23,14 @@ class _BeerPongFieldState extends State<BeerPongField> {
     }
   }
 
-  final List<String> words = ['Word1', 'Word2', 'Word3', 'Word4', 'Word5'];
+  final List<String> words = [
+    "Situps",
+    "Liegestütz",
+    "Plank",
+    "Squats",
+    "Handstand",
+    "Salto"
+  ];
   final Random random = Random();
 
   void _onButtonPress(ValueNotifier<Color> colorNotifier) {
@@ -31,7 +38,7 @@ class _BeerPongFieldState extends State<BeerPongField> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Random Word'),
+          title: Text('Challenge'),
           content: Text(words[random.nextInt(words.length)]),
           actions: <Widget>[
             TextButton(
