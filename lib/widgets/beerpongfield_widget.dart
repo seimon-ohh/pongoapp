@@ -1,18 +1,71 @@
+
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
-class BeerPongField extends StatelessWidget {
+class BeerPongField extends StatefulWidget {
   final int cups;
 
   BeerPongField({required this.cups});
 
+  @override
+  _BeerPongFieldState createState() => _BeerPongFieldState();
+}
+
+class _BeerPongFieldState extends State<BeerPongField> {
   int get pyramidSize {
-    if (cups == 6) {
+    if (widget.cups == 6) {
       return 3;
-    } else if (cups == 10) {
+    } else if (widget.cups == 10) {
       return 4;
     } else {
       throw ArgumentError('Cups must be 6 or 10.');
     }
+  }
+
+  final List<String> words = ['Word1', 'Word2', 'Word3', 'Word4', 'Word5'];
+  final Random random = Random();
+
+  void _onButtonPress(ValueNotifier<Color> colorNotifier) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Random Word'),
+          content: Text(words[random.nextInt(words.length)]),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+    colorNotifier.value = Colors.black;
+  }
+
+  Widget _buildCup() {
+    ValueNotifier<Color> colorNotifier = ValueNotifier<Color>(Colors.red);
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: ValueListenableBuilder<Color>(
+        valueListenable: colorNotifier,
+        builder: (context, color, _) {
+          return ElevatedButton(
+            onPressed: () => _onButtonPress(colorNotifier),
+            child: Text(''),
+            style: ElevatedButton.styleFrom(
+              primary: color,
+              shape: CircleBorder(),
+              padding: EdgeInsets.all(16.0),
+            ),
+          );
+        },
+      ),
+    );
   }
 
   List<Widget> _buildPyramid() {
@@ -20,20 +73,7 @@ class BeerPongField extends StatelessWidget {
     for (int row = 0; row < pyramidSize; row++) {
       List<Widget> rowContent = [];
       for (int col = 0; col < pyramidSize - row; col++) {
-        rowContent.add(
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {},
-              child: Text(''),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.red,
-                shape: CircleBorder(),
-                padding: EdgeInsets.all(16.0),
-              ),
-            ),
-          ),
-        );
+        rowContent.add(_buildCup());
       }
       pyramid.add(
         Padding(
