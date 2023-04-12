@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+
 import '../models/teammember.dart';
+import 'gamemode_screen.dart';
+import 'gamerules_screen.dart';
 
 class TeamListsWidget extends StatefulWidget {
   static const routeName = '/teamlist-screen';
@@ -34,6 +37,7 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Teams"),
+          backgroundColor: Colors.black12,
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -68,6 +72,13 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
                 child: Text('Team 2', style: TextStyle(fontSize: 20)),
               ),
               for (String member in _team2Members) Text(member),
+    ElevatedButton(
+    onPressed: () {
+    Navigator
+        .pushNamed(context, BeerPongRulesPage.routeName);
+    },
+    child: Text('Next'),
+    )
             ],
           ),
         ));

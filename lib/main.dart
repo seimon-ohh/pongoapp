@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pongoapp/models/teammember.dart';
+import 'package:pongoapp/screens/gameboard_screen.dart';
+import 'package:pongoapp/screens/gamerules_screen.dart';
 import 'package:pongoapp/screens/teamlist_screen.dart';
 import 'screens/gamemode_screen.dart';
 
@@ -50,7 +52,9 @@ class BeerPongApp extends StatelessWidget {
       ),
       routes: {
         GamemodeScreen.routeName: (ctx) => GamemodeScreen(),
-        TeamListsWidget.routeName: (ctx) => TeamListsWidget()
+        TeamListsWidget.routeName: (ctx) => TeamListsWidget(),
+        BeerPongRulesPage.routeName: (ctx) => BeerPongRulesPage(),
+        GameboardScreen.routeName: (ctx) => GameboardScreen(),
       },
     );
   }
