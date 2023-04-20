@@ -1,5 +1,9 @@
-class TeamMember {
-  final String name;
+import 'package:pongoapp/models/teammember.dart';
 
-  TeamMember(this.name);
+class TeamList {
+  final List<TeamMember> members = [];
+
+  void addMember(String name) {
+    members.add(TeamMember(name));
+  }
 }

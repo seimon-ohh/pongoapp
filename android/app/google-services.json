@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "27079020285",
+    "project_id": "pongo-9eaf4",
+    "storage_bucket": "pongo-9eaf4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27079020285:android:7b55950aa075d0814af894",
+        "android_client_info": {
+          "package_name": "com.example.pongoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "27079020285-939g2es27h53gbviteplvdm1hpp5utpn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrPYX3DTv5IrRViOhcbLonmIFuFECmUZk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "27079020285-939g2es27h53gbviteplvdm1hpp5utpn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

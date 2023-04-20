@@ -2,6 +2,12 @@
   "configVersion": 2,
   "packages": [
     {
+      "name": "_flutterfire_internals",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/_flutterfire_internals-1.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "async",
       "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/async-2.10.0",
       "packageUri": "lib/",
@@ -32,6 +38,24 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "cloud_firestore",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/cloud_firestore-4.5.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "cloud_firestore_platform_interface",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/cloud_firestore_platform_interface-5.12.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "cloud_firestore_web",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/cloud_firestore_web-3.4.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "collection",
       "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/collection-1.17.0",
       "packageUri": "lib/",
@@ -50,6 +74,42 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "firebase_core",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/firebase_core-2.10.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "firebase_core_platform_interface",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/firebase_core_platform_interface-4.6.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "firebase_core_web",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/firebase_core_web-2.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "firebase_database",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/firebase_database-10.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "firebase_database_platform_interface",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/firebase_database_platform_interface-0.2.3+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "firebase_database_web",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/firebase_database_web-0.2.2+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///opt/homebrew/Caskroom/flutter/2.10.1/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -64,6 +124,12 @@
     {
       "name": "flutter_test",
       "rootUri": "file:///opt/homebrew/Caskroom/flutter/2.10.1/flutter/packages/flutter_test",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "flutter_web_plugins",
+      "rootUri": "file:///opt/homebrew/Caskroom/flutter/2.10.1/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -98,8 +164,26 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "nested",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/nested-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "path",
       "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/path-1.8.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "plugin_platform_interface",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "provider",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/provider-6.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -146,6 +230,54 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "url_launcher",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/url_launcher-6.1.10",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "url_launcher_android",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/url_launcher_android-6.0.27",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "url_launcher_ios",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/url_launcher_ios-6.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "url_launcher_linux",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/url_launcher_linux-3.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "url_launcher_macos",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/url_launcher_macos-3.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "url_launcher_platform_interface",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/url_launcher_platform_interface-2.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "url_launcher_web",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/url_launcher_web-2.0.16",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "url_launcher_windows",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/url_launcher_windows-3.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "vector_math",
       "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/vector_math-2.1.4",
       "packageUri": "lib/",
@@ -158,7 +290,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-04-12T12:15:15.929185Z",
+  "generated": "2023-04-20T12:57:34.609647Z",
   "generator": "pub",
-  "generatorVersion": "2.19.5"
+  "generatorVersion": "2.19.6"
 }

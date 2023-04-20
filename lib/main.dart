@@ -1,19 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:pongoapp/models/teammember.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:pongoapp/models/game_data.dart';
 import 'package:pongoapp/screens/gameboard_screen.dart';
 import 'package:pongoapp/screens/gamerules_screen.dart';
 import 'package:pongoapp/screens/teamlist_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'models/teamlist.dart';
 import 'screens/gamemode_screen.dart';
 
-void main() => runApp(BeerPongApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => GameData(
+        gamemode: "",
+        numberOfCups: 0,
+        allowReracks: false,
+        challenges: "",
+        level: "",
+        team1: TeamList(),
+        team2: TeamList(),
+      ),
+      child: BeerPongApp(),
+    ),
+  );
+}
 
 class BeerPongApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Pongo Startseite',
-      theme:
-          ThemeData(scaffoldBackgroundColor: Color.fromARGB(255, 55, 50, 50)),
+      theme: ThemeData(
+          scaffoldBackgroundColor: Color.fromARGB(255, 55, 50, 50),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: TextButton.styleFrom(
+                  backgroundColor: Color.fromRGBO(188, 188, 188, 1),
+                  foregroundColor: Colors.black))),
       home: Scaffold(
         body: Center(
           child: Column(
@@ -35,6 +61,8 @@ class BeerPongApp extends StatelessWidget {
               Builder(builder: (BuildContext innerContext) {
                 return ElevatedButton(
                   onPressed: () {
+                    //erstelle Gamedata Objekt und gebe es dem gamemodescreen mit
+
                     Navigator.of(innerContext)
                         .pushNamed(GamemodeScreen.routeName);
                   },
@@ -43,8 +71,16 @@ class BeerPongApp extends StatelessWidget {
               }),
               SizedBox(height: 10),
               ElevatedButton(
-                onPressed: () {},
-                child: Text('Premium-Version kaufen'),
+                onPressed: () async {
+                  final Uri url =
+                      Uri.parse('https://play.google.com/store/games');
+                  if (await canLaunchUrl(url)) {
+                    await launchUrl(url);
+                  } else {
+                    throw "Could not launch $url";
+                  }
+                },
+                child: const Text('Premium-Version kaufen'),
               ),
             ],
           ),
