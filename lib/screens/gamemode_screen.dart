@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:pongoapp/models/game_data.dart';
 
 import 'package:pongoapp/screens/teamlist_screen.dart';
 import 'package:pongoapp/widgets/gamemode_carousel.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/gamedata_provider.dart';
 
 class GamemodeScreen extends StatelessWidget {
   static const routeName = '/gamemode-screen';
 
-
   @override
   Widget build(BuildContext context) {
+    final gameDataProvider = Provider.of<GameDataProvider>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Gamemode"),
@@ -25,9 +28,8 @@ class GamemodeScreen extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-
+                gameDataProvider.updateGamemode("classic");
                 Navigator.pushNamed(context, TeamListsWidget.routeName);
-
               },
               child: Text("Choose"),
             )

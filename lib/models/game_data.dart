@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
-import 'package:pongoapp/models/teamlist.dart';
 
-class GameData extends ValueNotifier<GameData> {
+class GameData {
   String gamemode;
-  TeamList team1;
-  TeamList team2;
+  List <String> team1;
+  List <String> team2;
   int numberOfCups;
   bool allowReracks;
   String challenges;
@@ -18,13 +16,5 @@ class GameData extends ValueNotifier<GameData> {
     required this.level,
     required this.team1,
     required this.team2,
-  }) : super(GameData(
-          gamemode: gamemode,
-          numberOfCups: numberOfCups,
-          allowReracks: allowReracks,
-          challenges: challenges,
-          level: level,
-          team1: team1,
-          team2: team2,
-        ));
+  });
 }

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:pongoapp/models/game_data.dart';
+import 'package:pongoapp/providers/gamedata_provider.dart';
 import 'package:pongoapp/screens/gameboard_screen.dart';
 import 'package:pongoapp/screens/gamerules_screen.dart';
 import 'package:pongoapp/screens/teamlist_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'models/teamlist.dart';
 import 'screens/gamemode_screen.dart';
 
 void main() async {
@@ -15,15 +14,7 @@ void main() async {
   await Firebase.initializeApp();
   runApp(
     ChangeNotifierProvider(
-      create: (context) => GameData(
-        gamemode: "",
-        numberOfCups: 0,
-        allowReracks: false,
-        challenges: "",
-        level: "",
-        team1: TeamList(),
-        team2: TeamList(),
-      ),
+      create: (context) => GameDataProvider(),
       child: BeerPongApp(),
     ),
   );
