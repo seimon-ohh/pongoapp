@@ -26,21 +26,27 @@ class BeerPongApp extends StatelessWidget {
     return MaterialApp(
       title: 'Pongo Startseite',
       theme: ThemeData(
-          scaffoldBackgroundColor: Color.fromARGB(255, 55, 50, 50),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-              style: TextButton.styleFrom(
-                  backgroundColor: Color.fromRGBO(188, 188, 188, 1),
-                  foregroundColor: Colors.black))),
+        fontFamily: "PressStart",
+        scaffoldBackgroundColor: Colors.grey,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero)
+          ),
+        ),
+      ),
       home: Scaffold(
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Willkommen bei Pongo!',
+                'Willkommen!',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 24,
-                    fontWeight: FontWeight.bold,
+                    fontFamily: "PressStart",
                     color: Colors.white),
               ),
               SizedBox(height: 20),
@@ -52,8 +58,6 @@ class BeerPongApp extends StatelessWidget {
               Builder(builder: (BuildContext innerContext) {
                 return ElevatedButton(
                   onPressed: () {
-                    //erstelle Gamedata Objekt und gebe es dem gamemodescreen mit
-
                     Navigator.of(innerContext)
                         .pushNamed(GamemodeScreen.routeName);
                   },

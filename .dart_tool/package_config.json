@@ -116,6 +116,18 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "flutter_fortune_wheel",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/flutter_fortune_wheel-1.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_hooks",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/flutter_hooks-0.18.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/flutter_lints-2.0.1",
       "packageUri": "lib/",
@@ -186,6 +198,12 @@
       "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/provider-6.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "quiver",
+      "rootUri": "file:///Users/simon/.pub-cache/hosted/pub.dev/quiver-3.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "sky_engine",
@@ -290,7 +308,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-04-20T14:29:15.746687Z",
+  "generated": "2023-04-21T10:03:04.363509Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

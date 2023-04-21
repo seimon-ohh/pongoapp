@@ -5,12 +5,13 @@ import '../models/game_data.dart';
 class GameDataProvider extends ChangeNotifier {
   GameData _gameData = GameData(
     gamemode: "",
-    numberOfCups: 0,
+    numberOfCups: 6,
     allowReracks: false,
     challenges: "",
     level: "",
     team1: [],
     team2: [],
+    beginner:"",
   );
 
   GameData get gameData => _gameData;
@@ -39,6 +40,9 @@ void updateChallenges(String newChallengesType){
 }
 void updateLevel (String newLevel){
     _gameData.level=newLevel;
+}
+void updateBeginner (String beginner){
+    _gameData.beginner = beginner;
 }
 
 

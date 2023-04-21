@@ -29,27 +29,31 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("Beer Pong Rules"),
+          title: const Text("Beer Pong Rules", style: TextStyle(fontSize: 16)),
           backgroundColor: Colors.black12,
         ),
         body: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            SizedBox(height: 40),
-            Text("Number of cups:",
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white)),
-            SizedBox(height: 10),
+            const SizedBox(height: 40),
+            const Text(
+              "Number of cups:",
+              style: TextStyle(
+                fontSize: 12,
+                color: Colors.white,
+              ),
+            ),
+           const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ToggleButtons(
                   color: Colors.white,
                   fillColor: Color.fromRGBO(188, 188, 188, 1),
-                  selectedColor: Color.fromRGBO(0, 0, 0, 1),
-                  borderRadius: BorderRadius.circular(10),
+                  selectedColor: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                  borderColor: Colors.white,
+                  selectedBorderColor: Colors.white,
                   isSelected: _cups.map((cup) => cup == _numberOfCups).toList(),
                   onPressed: (index) {
                     setState(() {
@@ -57,7 +61,12 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
                     });
                     gameDataProvider.updateNumberOfCups(_numberOfCups);
                   },
-                  children: _cups.map((cup) => Text(cup.toString())).toList(),
+                  children: _cups
+                      .map((cup) => Text(
+                            cup.toString(),
+                            style: TextStyle(fontSize: 12),
+                          ))
+                      .toList(),
                 ),
               ],
             ),
@@ -70,10 +79,9 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text(
-                    "Allow reracks",
-                    textAlign: TextAlign.center,
-                  ),
+                  child: Text("Allow reracks",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 12)),
                 ),
               ],
               isSelected: [_reracksEnabled],
@@ -88,7 +96,7 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
             Text(
               "Select a challenge:",
               style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ),
@@ -101,7 +109,7 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
               children: _challenges.map((challenge) {
                 return Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8),
-                  child: Text(challenge),
+                  child: Text(challenge, style: TextStyle(fontSize: 12)),
                 );
               }).toList(),
               isSelected: _challenges
@@ -118,7 +126,7 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
             Text(
               "Select a level:",
               style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ),
@@ -131,7 +139,7 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
               children: _levels.map((level) {
                 return Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8),
-                  child: Text(level),
+                  child: Text(level, style: TextStyle(fontSize: 12)),
                 );
               }).toList(),
               isSelected:
@@ -145,7 +153,7 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
             ),
             SizedBox(height: 140),
             ElevatedButton(
-              child: Text("Start game"),
+              child: Text("Start game", style: TextStyle(fontSize: 14)),
               onPressed: () {
                 Navigator.pushNamed(context, GameboardScreen.routeName);
               },

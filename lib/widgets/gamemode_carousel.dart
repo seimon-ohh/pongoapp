@@ -84,7 +84,8 @@ class GamemodeCarousel extends StatelessWidget {
                       gamemodes[index]['description'],
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 16.0,
+                        fontFamily: "Minecraft",
+                        fontSize: 14.0,
                         color: Colors.white,
                       ),
                     ),

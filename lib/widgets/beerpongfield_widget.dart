@@ -1,4 +1,3 @@
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -21,6 +20,15 @@ class _BeerPongFieldState extends State<BeerPongField> {
     } else {
       throw ArgumentError('Cups must be 6 or 10.');
     }
+  }
+
+  bool _showButton = true;
+
+  void _onPress() {
+    setState(() {
+      _showButton = false;
+    });
+
   }
 
   final List<String> words = [
@@ -102,6 +110,12 @@ class _BeerPongFieldState extends State<BeerPongField> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Column(children: _buildPyramid()),
+    if (_showButton)
+    ElevatedButton(
+    onPressed: _onPress,
+    child: Text('Start Game'),
+    ),
+            if (!_showButton) FortuneBarWidget(),
           Transform.rotate(
             angle: 3.14159265359,
             child: Column(children: _buildPyramid()),

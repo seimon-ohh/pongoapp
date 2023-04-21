@@ -1,12 +1,12 @@
-
 class GameData {
   String gamemode;
-  List <String> team1;
-  List <String> team2;
+  List<String> team1;
+  List<String> team2;
   int numberOfCups;
   bool allowReracks;
   String challenges;
   String level;
+  String beginner;
 
   GameData({
     required this.gamemode,
@@ -16,5 +16,6 @@ class GameData {
     required this.level,
     required this.team1,
     required this.team2,
+    required this.beginner,
   });
 }

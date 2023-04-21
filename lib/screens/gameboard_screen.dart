@@ -5,14 +5,17 @@ import 'package:provider/provider.dart';
 import '../providers/gamedata_provider.dart';
 
 class GameboardScreen extends StatelessWidget {
-  static const routeName= "/gameboard-screen";
+  static const routeName = "/gameboard-screen";
 
   @override
   Widget build(BuildContext context) {
-    final gameDataProvider = Provider.of<GameDataProvider>(context, listen: false);
-    print(gameDataProvider.gameData.numberOfCups);
+    final gameDataProvider =
+        Provider.of<GameDataProvider>(context, listen: false);
+
     return Scaffold(
-      body: BeerPongField(cups: gameDataProvider.gameData.numberOfCups),
+      body: BeerPongField(
+        cups: gameDataProvider.gameData.numberOfCups,
+      ),
     );
   }
 }

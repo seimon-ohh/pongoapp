@@ -33,8 +33,6 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     final gameDataProvider =
@@ -44,7 +42,7 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
       final snackBar = SnackBar(
         content: Text('Bitte Teammitglieder eintragen'),
         duration: Duration(seconds: 3),
-        backgroundColor: Colors.black38,
+        backgroundColor: Colors.white60,
         showCloseIcon: true,
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -116,9 +114,6 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
       );
     }
 
-    
-
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Teams"),
@@ -137,24 +132,26 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
             ListTile(
               title: TextField(
                 controller: _team1Controller,
+
                 decoration: InputDecoration(
                   labelText: 'Team 1 Member',
-                  labelStyle: TextStyle(color: Colors.white),
+                  labelStyle: TextStyle(color: Colors.white, fontSize: 10),
                 ),
               ),
-              trailing: ElevatedButton(
+              trailing: IconButton(
                 onPressed: _addMemberToTeam1,
-                child: Text('Add'),
+                icon: const Icon(Icons.add),
+                color: Colors.white,
               ),
             ),
-            SizedBox(height: 75),
+            SizedBox(height: 20),
             Divider(
               color: Colors.white,
-              thickness: 5.0,
+              thickness: 2.0,
               indent: 20.0,
               endIndent: 20.0,
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 20),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0),
               child: Text('Team 2',
@@ -170,11 +167,15 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
                 controller: _team2Controller,
                 decoration: InputDecoration(
                     labelText: 'Team 2 Member',
-                    labelStyle: TextStyle(color: Colors.white)),
+                    labelStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                    )),
               ),
-              trailing: ElevatedButton(
+              trailing: IconButton(
                 onPressed: _addMemberToTeam2,
-                child: Text('Add'),
+                icon: Icon(Icons.add),
+                color: Colors.white,
               ),
             ),
             SizedBox(height: 150),
@@ -188,9 +189,15 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
                 gameDataProvider.updateTeamList2(_team2Members);
                 Navigator.pushNamed(context, BeerPongRulesPage.routeName);
               }
-            : ()=> _showSnackbar(context),
-        label: Text('Next', style: TextStyle(color: Colors.black),),
-        icon: Icon(Icons.arrow_forward, color: Colors.black,),
+            : () => _showSnackbar(context),
+        label: Text(
+          'Next',
+          style: TextStyle(color: Colors.black),
+        ),
+        icon: Icon(
+          Icons.arrow_forward,
+          color: Colors.black,
+        ),
         backgroundColor: Color.fromRGBO(188, 188, 188, 1),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
