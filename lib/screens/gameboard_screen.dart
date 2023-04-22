@@ -102,7 +102,7 @@ class _GameboardScreenState extends State<GameboardScreen> {
                   showBeginnerPopup(name);
                 },
               )
-                  : SizedBox.shrink(),
+                  : const SizedBox.shrink(),
               Transform.rotate(
                 angle: 3.14159265359,
                 child: BeerPongField(
