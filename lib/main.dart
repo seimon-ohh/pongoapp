@@ -147,6 +147,7 @@ class BeerPongApp extends StatelessWidget {
         TeamListsWidget.routeName: (ctx) => TeamListsWidget(),
         BeerPongRulesPage.routeName: (ctx) => BeerPongRulesPage(),
         GameboardScreen.routeName: (ctx) => GameboardScreen(),
+        TauziehenScreen.routeName: (ctx) => TauziehenScreen(),
       },
     );
   }

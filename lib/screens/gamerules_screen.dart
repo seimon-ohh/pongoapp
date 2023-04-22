@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pongoapp/screens/gameboard_screen.dart';
+import 'package:pongoapp/screens/tauziehen_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/gamedata_provider.dart';
@@ -183,8 +184,14 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
                 ElevatedButton(
                   child: Text("Start game", style: TextStyle(fontSize: 14)),
                   onPressed: () {
-                    Navigator.pushNamed(context, GameboardScreen.routeName);
-                  },
+                    if (gameDataProvider.gameData.gamemode == "Classic") {
+                      Navigator.pushNamed(context, GameboardScreen.routeName);
+                    } else
+                    if (gameDataProvider.gameData.gamemode == "Tauziehen") {
+                      Navigator.pushNamed(context, TauziehenScreen.routeName);
+                    }
+                  }
+
                 ),
               ]),
         ));
