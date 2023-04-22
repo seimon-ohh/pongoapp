@@ -5,13 +5,16 @@ import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:pongoapp/providers/gamedata_provider.dart';
 import 'package:pongoapp/screens/gameboard_screen.dart';
 import 'package:pongoapp/screens/gamerules_screen.dart';
+import 'package:pongoapp/screens/tauziehen_screen.dart';
 import 'package:pongoapp/screens/teamlist_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'helpers/locator.dart';
 import 'screens/gamemode_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 void main() async {
+  setupLocator();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(

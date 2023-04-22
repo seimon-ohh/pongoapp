@@ -26,13 +26,7 @@ class GamemodeScreen extends StatelessWidget {
             SizedBox(
               height: 40,
             ),
-            ElevatedButton(
-              onPressed: () {
-                gameDataProvider.updateGamemode("classic");
-                Navigator.pushNamed(context, TeamListsWidget.routeName);
-              },
-              child: Text("Choose"),
-            )
+
           ],
         ),
       ),

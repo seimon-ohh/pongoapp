@@ -1,8 +1,10 @@
 import 'dart:math';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
-import 'package:pongoapp/widgets/fortunebar.dart';
+import 'package:pongoapp/providers/gamedata_provider.dart';
+import 'package:provider/provider.dart';
+
+import '../helpers/locator.dart';
 
 class BeerPongField extends StatefulWidget {
   final int cups;
@@ -14,6 +16,34 @@ class BeerPongField extends StatefulWidget {
 }
 
 class _BeerPongFieldState extends State<BeerPongField> {
+
+  List<Map<String, dynamic>> data = [];
+
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+
+  }
+
+  void fetchData() async {
+    List<Map<String, dynamic>> fetchedData = await fetchDataFromFirestore();
+    setState(() {
+      data = fetchedData;
+    });
+
+  }
+
+  Future<List<Map<String, dynamic>>> fetchDataFromFirestore() async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference collection = firestore.collection('gamedata');
+    QuerySnapshot querySnapshot = await collection.get();
+    return querySnapshot.docs
+        .map((doc) => doc.data() as Map<String, dynamic>)
+        .toList();
+  }
+
   int get pyramidSize {
     if (widget.cups == 6) {
       return 3;
@@ -23,6 +53,9 @@ class _BeerPongFieldState extends State<BeerPongField> {
       throw ArgumentError('Cups must be 6 or 10.');
     }
   }
+
+  GameDataProvider gameDataProvider = locator<GameDataProvider>();
+
 
   final List<String> words = [
     "Situps",
@@ -98,6 +131,7 @@ class _BeerPongFieldState extends State<BeerPongField> {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(children: _buildPyramid());
   }
 }

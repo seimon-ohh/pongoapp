@@ -14,7 +14,7 @@ class BeerPongRulesPage extends StatefulWidget {
 class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
   int _numberOfCups = 6;
   bool _reracksEnabled = true;
-  String _selectedChallenge = "None";
+  String _selectedChallenge = "Quiz";
   String _selectedLevel = "Normal";
 
   final List<String> _challenges = ["Quiz", "Get active", "Truth or Dare"];
