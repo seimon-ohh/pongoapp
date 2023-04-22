@@ -13,12 +13,12 @@ class GameboardScreen extends StatefulWidget {
 }
 
 class _GameboardScreenState extends State<GameboardScreen> {
+  bool showButton = true;
+
   @override
   Widget build(BuildContext context) {
     final gameDataProvider =
         Provider.of<GameDataProvider>(context, listen: false);
-
-    bool showButton = true;
 
     void onPress() {
       setState(() {
@@ -34,17 +34,18 @@ class _GameboardScreenState extends State<GameboardScreen> {
             BeerPongField(
               cups: gameDataProvider.gameData.numberOfCups,
             ),
-            if (showButton)
-              ElevatedButton(
-                onPressed: onPress,
-                child: Text('Start Game'),
-              ),
-            if (!showButton) FortuneBarWidget(),
+            showButton
+                ? ElevatedButton(
+                    onPressed: onPress,
+                    child: Text('Start Game'),
+                  )
+                : FortuneBarWidget(),
             Transform.rotate(
-                angle: 3.14159265359,
-                child: BeerPongField(
-                  cups: gameDataProvider.gameData.numberOfCups,
-                )),
+              angle: 3.14159265359,
+              child: BeerPongField(
+                cups: gameDataProvider.gameData.numberOfCups,
+              ),
+            ),
           ],
         ),
       ),
