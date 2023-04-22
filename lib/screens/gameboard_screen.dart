@@ -16,6 +16,33 @@ class _GameboardScreenState extends State<GameboardScreen> {
   bool showButton = true;
   bool showFortuneBar = false;
 
+  Future<bool> showExitConfirmationDialog() async {
+    return await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Sind Sie sicher, dass Sie den Bildschirm verlassen möchten?\n \nDas aktuelle Spiel wird somit beendet!', style: TextStyle(fontSize: 12),),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+              child: Text('Ja',style: TextStyle(fontSize: 12),),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: Text('Nein',style: TextStyle(fontSize: 12),),
+            ),
+          ],
+        );
+      },
+    ) ??
+        false;
+  }
+
+
   void showBeginnerPopup(String name) {
     showDialog(
       context: context,
@@ -53,34 +80,37 @@ class _GameboardScreenState extends State<GameboardScreen> {
     }
 
 
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            BeerPongField(
-              cups: gameDataProvider.gameData.numberOfCups,
-            ),
-            showButton
-                ? ElevatedButton(
-              onPressed: onPress,
-              child: Text('Start Game'),
-            )
-                : showFortuneBar
-                ? FortuneBarWidget(
-              selected: (name) {
-                gameDataProvider.updateBeginner(name);
-                showBeginnerPopup(name);
-              },
-            )
-                : SizedBox.shrink(),
-            Transform.rotate(
-              angle: 3.14159265359,
-              child: BeerPongField(
+    return WillPopScope(
+      onWillPop: showExitConfirmationDialog,
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              BeerPongField(
                 cups: gameDataProvider.gameData.numberOfCups,
               ),
-            ),
-          ],
+              showButton
+                  ? ElevatedButton(
+                onPressed: onPress,
+                child: Text('Start Game'),
+              )
+                  : showFortuneBar
+                  ? FortuneBarWidget(
+                selected: (name) {
+                  gameDataProvider.updateBeginner(name);
+                  showBeginnerPopup(name);
+                },
+              )
+                  : SizedBox.shrink(),
+              Transform.rotate(
+                angle: 3.14159265359,
+                child: BeerPongField(
+                  cups: gameDataProvider.gameData.numberOfCups,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
