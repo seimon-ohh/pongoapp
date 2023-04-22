@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
+import 'package:pongoapp/screens/tauziehen_screen.dart';
 
 import '../providers/gamedata_provider.dart';
 import 'gamerules_screen.dart';
@@ -196,7 +197,11 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
             ? () {
                 gameDataProvider.updateTeamList1(_team1Members);
                 gameDataProvider.updateTeamList2(_team2Members);
-                Navigator.pushNamed(context, BeerPongRulesPage.routeName);
+                if (gameDataProvider.gameData.gamemode == 'Classic') {
+                  Navigator.pushNamed(context, BeerPongRulesPage.routeName);
+                } else if (gameDataProvider.gameData.gamemode == 'Tauziehen') {
+                  Navigator.pushNamed(context, TauziehenScreen.routeName);
+                }
               }
             : () => _showSnackbar(context),
         label: Text(

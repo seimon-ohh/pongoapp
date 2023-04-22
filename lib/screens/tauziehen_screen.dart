@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pongoapp/widgets/beerpongfield_widget.dart';
 
 class TauziehenScreen extends StatefulWidget {
-
   static const routeName = "/tauziehen-screen";
   @override
   State<TauziehenScreen> createState() => _TauziehenScreenState();
@@ -26,7 +26,27 @@ class _TauziehenScreenState extends State<TauziehenScreen> {
     });
   }
 
-  @override
+  Widget _buildCup() {
+    ValueNotifier<Color> colorNotifier = ValueNotifier<Color>(Colors.red);
+    return Padding(
+      padding: EdgeInsets.all(8.0),
+      child: ValueListenableBuilder<Color>(
+        valueListenable: colorNotifier,
+        builder: (context, color, _) {
+          return ElevatedButton(
+            onPressed: () => {},
+            child: Text(''),
+            style: ElevatedButton.styleFrom(
+              foregroundColor: color,
+              shape: CircleBorder(),
+              padding: EdgeInsets.all(16.0),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   Widget build(BuildContext context) {
     List<Widget> cups = List.generate(7, (index) {
       bool isSelected = index == selectedCupIndex;
@@ -44,15 +64,7 @@ class _TauziehenScreenState extends State<TauziehenScreen> {
             ),
             margin: EdgeInsets.all(10),
             height: isSelected ? 100 : 80,
-            child: Center(
-              child: Text(
-                "Cup ${index + 1}",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+            child: _buildCup(),
           ),
         ),
       );
@@ -60,7 +72,7 @@ class _TauziehenScreenState extends State<TauziehenScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Tug of War"),
+        title: Text("Tauziehen"),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

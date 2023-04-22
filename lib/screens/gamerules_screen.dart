@@ -168,7 +168,10 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
                   children: _levels.map((level) {
                     return Padding(
                       padding: EdgeInsets.symmetric(horizontal: 8),
-                      child: Text(level, style: TextStyle(fontSize: 12, fontFamily: "Minecraft"),),
+                      child: Text(
+                        level,
+                        style: TextStyle(fontSize: 12, fontFamily: "Minecraft"),
+                      ),
                     );
                   }).toList(),
                   isSelected:
@@ -182,17 +185,10 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
                 ),
                 SizedBox(height: 140),
                 ElevatedButton(
-                  child: Text("Start game", style: TextStyle(fontSize: 14)),
-                  onPressed: () {
-                    if (gameDataProvider.gameData.gamemode == "Classic") {
+                    child: Text("Start game", style: TextStyle(fontSize: 14)),
+                    onPressed: () {
                       Navigator.pushNamed(context, GameboardScreen.routeName);
-                    } else
-                    if (gameDataProvider.gameData.gamemode == "Tauziehen") {
-                      Navigator.pushNamed(context, TauziehenScreen.routeName);
-                    }
-                  }
-
-                ),
+                    }),
               ]),
         ));
   }
