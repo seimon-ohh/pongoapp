@@ -8,7 +8,15 @@ import 'package:provider/provider.dart';
 import '../helpers/custom_indicator.dart';
 import '../providers/gamedata_provider.dart';
 
-class FortuneBarWidget extends StatelessWidget {
+class FortuneBarWidget extends StatefulWidget {
+  final ValueChanged<String> selected;
+
+  FortuneBarWidget({required this.selected});
+  @override
+  State<FortuneBarWidget> createState() => _FortuneBarWidgetState();
+}
+
+class _FortuneBarWidgetState extends State<FortuneBarWidget> {
   StreamController<int> controller = StreamController<int>();
 
   @override
@@ -37,17 +45,14 @@ class FortuneBarWidget extends StatelessWidget {
     controller.add(selectedIndex);
 
     // Aufrufen von updateBeginner, um die zufällig ausgewählte Person zu speichern
-    String? selectedBeginner =
-        (fortuneItems.elementAt(selectedIndex).child as Text).data;
-    gameDataProvider.updateBeginner(selectedBeginner!);
+
 
     return FortuneBar(
       indicators: const <FortuneIndicator>[
         FortuneIndicator(
           alignment: Alignment.bottomCenter,
-          child: CustomTriangleIndicator(height: 10,width: 60, notRotate: true,)
+          child: CustomTriangleIndicator(height: 10, width: 60, notRotate: true),
         ),
-
       ],
       selected: controller.stream,
       items: fortuneItems,
@@ -56,6 +61,10 @@ class FortuneBarWidget extends StatelessWidget {
         borderColor: Colors.white,
         borderWidth: 2.0,
       ),
+      onAnimationEnd: () {
+        // Rufen Sie den selected-Callback im Haupt-Widget auf, um die ausgewählte Person zu aktualisieren und das Popup anzuzeigen
+        widget.selected((fortuneItems.elementAt(selectedIndex).child as Text).data!);
+      },
     );
   }
 }

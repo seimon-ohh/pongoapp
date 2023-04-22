@@ -14,6 +14,31 @@ class GameboardScreen extends StatefulWidget {
 
 class _GameboardScreenState extends State<GameboardScreen> {
   bool showButton = true;
+  bool showFortuneBar = false;
+
+  void showBeginnerPopup(String name) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('$name beginnt!'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                setState(() {
+                  showButton = false;
+                  showFortuneBar = false;
+                });
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +48,10 @@ class _GameboardScreenState extends State<GameboardScreen> {
     void onPress() {
       setState(() {
         showButton = false;
+        showFortuneBar = true;
       });
     }
+
 
     return Scaffold(
       body: Center(
@@ -36,10 +63,17 @@ class _GameboardScreenState extends State<GameboardScreen> {
             ),
             showButton
                 ? ElevatedButton(
-                    onPressed: onPress,
-                    child: Text('Start Game'),
-                  )
-                : FortuneBarWidget(),
+              onPressed: onPress,
+              child: Text('Start Game'),
+            )
+                : showFortuneBar
+                ? FortuneBarWidget(
+              selected: (name) {
+                gameDataProvider.updateBeginner(name);
+                showBeginnerPopup(name);
+              },
+            )
+                : SizedBox.shrink(),
             Transform.rotate(
               angle: 3.14159265359,
               child: BeerPongField(
