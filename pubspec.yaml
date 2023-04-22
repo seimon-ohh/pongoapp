@@ -42,6 +42,8 @@ dependencies:
   cloud_firestore: ^4.5.2
   provider: ^6.0.5
   flutter_fortune_wheel: ^1.2.0
+  flutter_svg: ^2.0.5
+  flutter_expandable_fab: ^1.7.1
   
 
 dev_dependencies:

@@ -33,132 +33,160 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
           backgroundColor: Colors.black12,
         ),
         body: SingleChildScrollView(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            const SizedBox(height: 40),
-            const Text(
-              "Number of cups:",
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.white,
-              ),
-            ),
-           const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                const SizedBox(height: 40),
+                const Text(
+                  "Number of cups:",
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ToggleButtons(
+                      color: Colors.white,
+                      fillColor: Color.fromRGBO(188, 188, 188, 1),
+                      selectedColor: Colors.black,
+                      borderRadius: BorderRadius.zero,
+                      borderColor: Colors.white,
+                      selectedBorderColor: Colors.white,
+                      isSelected:
+                          _cups.map((cup) => cup == _numberOfCups).toList(),
+                      onPressed: (index) {
+                        setState(() {
+                          _numberOfCups = _cups[index];
+                        });
+                        gameDataProvider.updateNumberOfCups(_numberOfCups);
+                      },
+                      children: _cups
+                          .map((cup) => Text(
+                                cup.toString(),
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontFamily: "Minecraft",
+                                ),
+                              ))
+                          .toList(),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
+                const Text(
+                  "Nachwurf:",
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 10),
                 ToggleButtons(
                   color: Colors.white,
                   fillColor: Color.fromRGBO(188, 188, 188, 1),
-                  selectedColor: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
+                  selectedColor: Colors.black,
+                  borderRadius: BorderRadius.zero,
                   borderColor: Colors.white,
                   selectedBorderColor: Colors.white,
-                  isSelected: _cups.map((cup) => cup == _numberOfCups).toList(),
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Text(
+                        "Allow rerack",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontFamily: "Minecraft",
+                        ),
+                      ),
+                    ),
+                  ],
+                  isSelected: [_reracksEnabled],
                   onPressed: (index) {
                     setState(() {
-                      _numberOfCups = _cups[index];
+                      _reracksEnabled = !_reracksEnabled;
                     });
-                    gameDataProvider.updateNumberOfCups(_numberOfCups);
+                    gameDataProvider.updateAllowReracks(_reracksEnabled);
                   },
-                  children: _cups
-                      .map((cup) => Text(
-                            cup.toString(),
-                            style: TextStyle(fontSize: 12),
-                          ))
+                ),
+                SizedBox(height: 20),
+                Text(
+                  "Select a challenge:",
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+                SizedBox(height: 10),
+                ToggleButtons(
+                  color: Colors.white,
+                  fillColor: Color.fromRGBO(188, 188, 188, 1),
+                  selectedColor: Colors.black,
+                  borderRadius: BorderRadius.zero,
+                  borderColor: Colors.white,
+                  selectedBorderColor: Colors.white,
+                  children: _challenges.map((challenge) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(
+                        challenge,
+                        style: TextStyle(fontSize: 12, fontFamily: "Minecraft"),
+                      ),
+                    );
+                  }).toList(),
+                  isSelected: _challenges
+                      .map((challenge) => challenge == _selectedChallenge)
                       .toList(),
+                  onPressed: (index) {
+                    setState(() {
+                      _selectedChallenge = _challenges[index];
+                    });
+                    gameDataProvider.updateChallenges(_selectedChallenge);
+                  },
                 ),
-              ],
-            ),
-            SizedBox(height: 20),
-            ToggleButtons(
-              color: Colors.white,
-              fillColor: Color.fromRGBO(188, 188, 188, 1),
-              selectedColor: Color.fromRGBO(0, 0, 0, 1),
-              borderRadius: BorderRadius.circular(10),
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text("Allow reracks",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 12)),
+                SizedBox(height: 20),
+                Text(
+                  "Select a level:",
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
-              ],
-              isSelected: [_reracksEnabled],
-              onPressed: (index) {
-                setState(() {
-                  _reracksEnabled = !_reracksEnabled;
-                });
-                gameDataProvider.updateAllowReracks(_reracksEnabled);
-              },
-            ),
-            SizedBox(height: 20),
-            Text(
-              "Select a challenge:",
-              style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ),
-            SizedBox(height: 10),
-            ToggleButtons(
-              color: Colors.white,
-              fillColor: Color.fromRGBO(188, 188, 188, 1),
-              selectedColor: Color.fromRGBO(0, 0, 0, 1),
-              borderRadius: BorderRadius.circular(10),
-              children: _challenges.map((challenge) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                  child: Text(challenge, style: TextStyle(fontSize: 12)),
-                );
-              }).toList(),
-              isSelected: _challenges
-                  .map((challenge) => challenge == _selectedChallenge)
-                  .toList(),
-              onPressed: (index) {
-                setState(() {
-                  _selectedChallenge = _challenges[index];
-                });
-                gameDataProvider.updateChallenges(_selectedChallenge);
-              },
-            ),
-            SizedBox(height: 20),
-            Text(
-              "Select a level:",
-              style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ),
-            SizedBox(height: 10),
-            ToggleButtons(
-              color: Colors.white,
-              fillColor: Color.fromRGBO(188, 188, 188, 1),
-              selectedColor: Color.fromRGBO(0, 0, 0, 1),
-              borderRadius: BorderRadius.circular(10),
-              children: _levels.map((level) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                  child: Text(level, style: TextStyle(fontSize: 12)),
-                );
-              }).toList(),
-              isSelected:
-                  _levels.map((level) => level == _selectedLevel).toList(),
-              onPressed: (index) {
-                setState(() {
-                  _selectedLevel = _levels[index];
-                });
-                gameDataProvider.updateLevel(_selectedLevel);
-              },
-            ),
-            SizedBox(height: 140),
-            ElevatedButton(
-              child: Text("Start game", style: TextStyle(fontSize: 14)),
-              onPressed: () {
-                Navigator.pushNamed(context, GameboardScreen.routeName);
-              },
-            ),
-          ]),
+                SizedBox(height: 10),
+                ToggleButtons(
+                  color: Colors.white,
+                  fillColor: Color.fromRGBO(188, 188, 188, 1),
+                  selectedColor: Colors.black,
+                  borderRadius: BorderRadius.zero,
+                  borderColor: Colors.white,
+                  selectedBorderColor: Colors.white,
+                  children: _levels.map((level) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(level, style: TextStyle(fontSize: 12, fontFamily: "Minecraft"),),
+                    );
+                  }).toList(),
+                  isSelected:
+                      _levels.map((level) => level == _selectedLevel).toList(),
+                  onPressed: (index) {
+                    setState(() {
+                      _selectedLevel = _levels[index];
+                    });
+                    gameDataProvider.updateLevel(_selectedLevel);
+                  },
+                ),
+                SizedBox(height: 140),
+                ElevatedButton(
+                  child: Text("Start game", style: TextStyle(fontSize: 14)),
+                  onPressed: () {
+                    Navigator.pushNamed(context, GameboardScreen.routeName);
+                  },
+                ),
+              ]),
         ));
   }
 }

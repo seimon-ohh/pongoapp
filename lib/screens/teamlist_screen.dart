@@ -90,8 +90,11 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
     Widget _buildMemberTile(
         BuildContext context, String member, List<String> teamMembers) {
       return ListTile(
-        title:
-            Text(member, style: TextStyle(color: Colors.white, fontSize: 16)),
+        shape: RoundedRectangleBorder(
+            side: BorderSide(color: Colors.white, width: 0.5)),
+        title: Text(member,
+            style: TextStyle(
+                color: Colors.white, fontSize: 16, fontFamily: "Minecraft")),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -130,12 +133,16 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
             for (String member in _team1Members)
               _buildMemberTile(context, member, _team1Members),
             ListTile(
+              shape: RoundedRectangleBorder(
+                side: BorderSide(color: Colors.white),
+              ),
               title: TextField(
                 controller: _team1Controller,
-
+                style: TextStyle(
+                    color: Colors.white, fontSize: 14, fontFamily: "Minecraft"),
                 decoration: InputDecoration(
                   labelText: 'Team 1 Member',
-                  labelStyle: TextStyle(color: Colors.white, fontSize: 10),
+                  labelStyle: TextStyle(color: Colors.white, fontSize: 12),
                 ),
               ),
               trailing: IconButton(
@@ -148,10 +155,7 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
             Divider(
               color: Colors.white,
               thickness: 2.0,
-              indent: 20.0,
-              endIndent: 20.0,
             ),
-            SizedBox(height: 20),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0),
               child: Text('Team 2',
@@ -163,13 +167,18 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
             for (String member in _team2Members)
               _buildMemberTile(context, member, _team2Members),
             ListTile(
+              shape: RoundedRectangleBorder(
+                side: BorderSide(color: Colors.white),
+              ),
               title: TextField(
+                style: TextStyle(
+                    color: Colors.white, fontSize: 14, fontFamily: "Minecraft"),
                 controller: _team2Controller,
                 decoration: InputDecoration(
                     labelText: 'Team 2 Member',
                     labelStyle: TextStyle(
                       color: Colors.white,
-                      fontSize: 10,
+                      fontSize: 12,
                     )),
               ),
               trailing: IconButton(

@@ -22,15 +22,6 @@ class _BeerPongFieldState extends State<BeerPongField> {
     }
   }
 
-  bool _showButton = true;
-
-  void _onPress() {
-    setState(() {
-      _showButton = false;
-    });
-
-  }
-
   final List<String> words = [
     "Situps",
     "Liegestütz",
@@ -105,23 +96,6 @@ class _BeerPongFieldState extends State<BeerPongField> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Column(children: _buildPyramid()),
-    if (_showButton)
-    ElevatedButton(
-    onPressed: _onPress,
-    child: Text('Start Game'),
-    ),
-            if (!_showButton) FortuneBarWidget(),
-          Transform.rotate(
-            angle: 3.14159265359,
-            child: Column(children: _buildPyramid()),
-          ),
-        ],
-      ),
-    );
+    return Column(children: _buildPyramid());
   }
 }
