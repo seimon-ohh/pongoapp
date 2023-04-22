@@ -8,6 +8,7 @@ import '../helpers/locator.dart';
 
 class BeerPongField extends StatefulWidget {
   final int cups;
+  int _elapsedSeconds = 0;
 
   BeerPongField({required this.cups});
 
@@ -16,15 +17,12 @@ class BeerPongField extends StatefulWidget {
 }
 
 class _BeerPongFieldState extends State<BeerPongField> {
-
   List<Map<String, dynamic>> data = [];
-
 
   @override
   void initState() {
     super.initState();
     fetchData();
-
   }
 
   void fetchData() async {
@@ -32,7 +30,6 @@ class _BeerPongFieldState extends State<BeerPongField> {
     setState(() {
       data = fetchedData;
     });
-
   }
 
   Future<List<Map<String, dynamic>>> fetchDataFromFirestore() async {
@@ -55,7 +52,6 @@ class _BeerPongFieldState extends State<BeerPongField> {
   }
 
   GameDataProvider gameDataProvider = locator<GameDataProvider>();
-
 
   final List<String> words = [
     "Situps",
@@ -131,7 +127,6 @@ class _BeerPongFieldState extends State<BeerPongField> {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(children: _buildPyramid());
   }
 }

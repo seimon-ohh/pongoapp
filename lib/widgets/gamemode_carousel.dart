@@ -59,11 +59,11 @@ class GamemodeCarousel extends StatelessWidget {
     // Add more gamemodes as needed
   ];
 
-  @override
   Widget build(BuildContext context) {
     final gameDataProvider =
         Provider.of<GameDataProvider>(context, listen: false);
-    return Column(
+    return SingleChildScrollView(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -116,7 +116,6 @@ class GamemodeCarousel extends StatelessWidget {
                         foregroundColor: Colors.black,
                         backgroundColor:
                             gamemodes[index]["isLocked"] ? Colors.grey : null,
-
                       ),
                     )
                   ],
@@ -131,6 +130,8 @@ class GamemodeCarousel extends StatelessWidget {
               enlargeCenterPage: true,
             ),
           ),
-        ]);
+        ],
+      ),
+    );
   }
 }

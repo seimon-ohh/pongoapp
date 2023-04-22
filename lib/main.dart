@@ -46,6 +46,20 @@ class BeerPongApp extends StatelessWidget {
       home: Scaffold(
         body: Stack(
           children: [
+            Positioned(
+              top: 20,
+              right: 10,
+              child: FloatingActionButton(
+                backgroundColor: Colors.white,
+                onPressed: () {
+                  // Hier die Aktion für das Profil-Icon einfügen
+                },
+                child: Icon(
+                  Icons.person_outline,
+                  color: Colors.black,
+                ),
+              ),
+            ),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -101,16 +115,19 @@ class BeerPongApp extends StatelessWidget {
                 onPressed: () {
                   // Hier die Aktion für das Fragezeichen-Icon einfügen
                 },
-                child: Icon(Icons.help_outline, color: Colors.black,),
+                child: Icon(
+                  Icons.help_outline,
+                  color: Colors.black,
+                ),
               ),
             ),
           ],
         ),
         floatingActionButtonLocation: ExpandableFab.location,
         floatingActionButton: ExpandableFab(
-
           distance: 50,
-          closeButtonStyle: ExpandableFabCloseButtonStyle(backgroundColor: Colors.grey),
+          closeButtonStyle:
+              ExpandableFabCloseButtonStyle(backgroundColor: Colors.grey),
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
           child: Icon(Icons.language),
