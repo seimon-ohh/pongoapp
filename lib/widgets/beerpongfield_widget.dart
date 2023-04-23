@@ -19,10 +19,10 @@ class BeerPongField extends StatefulWidget {
 class _BeerPongFieldState extends State<BeerPongField> {
   List<Map<String, dynamic>> data = [];
 
-  @override
+@override
   void initState() {
+   fetchData();
     super.initState();
-    fetchData();
   }
 
   void fetchData() async {
@@ -30,7 +30,9 @@ class _BeerPongFieldState extends State<BeerPongField> {
     setState(() {
       data = fetchedData;
     });
+
   }
+
 
   Future<List<Map<String, dynamic>>> fetchDataFromFirestore() async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -51,25 +53,39 @@ class _BeerPongFieldState extends State<BeerPongField> {
     }
   }
 
-  GameDataProvider gameDataProvider = locator<GameDataProvider>();
-
-  final List<String> words = [
-    "Situps",
-    "Liegestütz",
-    "Plank",
-    "Squats",
-    "Handstand",
-    "Salto"
-  ];
   final Random random = Random();
 
-  void _onButtonPress(ValueNotifier<Color> colorNotifier) {
+
+  List<String> getQuestionAndAnswer(int index) {
+    if (data.isEmpty || data[0]["quiz"] == null) {
+      return ["No quiz data available", ""];
+    } else if (index < 0 || index >= data[0]["quiz"].length) {
+      return ["Invalid index", ""];
+    } else {
+      Map<String, dynamic> quizEntry = data[0]["quiz"][index];
+      String question = quizEntry["question"];
+      String answer = quizEntry["answer"];
+      return [question, answer];
+    }
+  }
+
+
+  void _onButtonPress(
+      ValueNotifier<Color> colorNotifier, GameDataProvider gameDataProvider) {
+    List<String> questionAndAnswer = getQuestionAndAnswer(1);
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Challenge'),
-          content: Text(words[random.nextInt(words.length)]),
+          title: Text(gameDataProvider.gameData.challenges),
+          content: Column(
+
+            children: [
+              Text("Question: ${questionAndAnswer[0]}"),
+              Text("Answer: ${questionAndAnswer[1]}")
+            ],
+          ),
           actions: <Widget>[
             TextButton(
               child: Text('Close'),
@@ -81,10 +97,10 @@ class _BeerPongFieldState extends State<BeerPongField> {
         );
       },
     );
-    colorNotifier.value = Colors.black;
+    colorNotifier.value = Colors.white10;
   }
 
-  Widget _buildCup() {
+  Widget _buildCup(GameDataProvider gameDataProvider) {
     ValueNotifier<Color> colorNotifier = ValueNotifier<Color>(Colors.red);
     return Padding(
       padding: EdgeInsets.all(8.0),
@@ -92,7 +108,7 @@ class _BeerPongFieldState extends State<BeerPongField> {
         valueListenable: colorNotifier,
         builder: (context, color, _) {
           return ElevatedButton(
-            onPressed: () => _onButtonPress(colorNotifier),
+            onPressed: () => _onButtonPress(colorNotifier, gameDataProvider),
             child: Text(''),
             style: ElevatedButton.styleFrom(
               primary: color,
@@ -105,12 +121,12 @@ class _BeerPongFieldState extends State<BeerPongField> {
     );
   }
 
-  List<Widget> _buildPyramid() {
+  List<Widget> _buildPyramid(GameDataProvider gameDataProvider) {
     List<Widget> pyramid = [];
     for (int row = 0; row < pyramidSize; row++) {
       List<Widget> rowContent = [];
       for (int col = 0; col < pyramidSize - row; col++) {
-        rowContent.add(_buildCup());
+        rowContent.add(_buildCup(gameDataProvider));
       }
       pyramid.add(
         Padding(
@@ -127,6 +143,10 @@ class _BeerPongFieldState extends State<BeerPongField> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: _buildPyramid());
+    final gameDataProvider =
+        Provider.of<GameDataProvider>(context, listen: false);
+
+
+    return Column(children: _buildPyramid(gameDataProvider));
   }
 }

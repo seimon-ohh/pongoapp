@@ -40,7 +40,7 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
         Provider.of<GameDataProvider>(context, listen: false);
 
     void _showSnackbar(BuildContext context) {
-      final snackBar = SnackBar(
+      final snackBar = const SnackBar(
         content: Text('Bitte Teammitglieder eintragen'),
         duration: Duration(seconds: 3),
         backgroundColor: Colors.white60,
@@ -58,22 +58,22 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Edit Team Member'),
+            title: const Text('Edit Team Member'),
             content: TextField(
               controller: _editController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Team Member',
               ),
             ),
             actions: <Widget>[
               TextButton(
-                child: Text('Cancel'),
+                child: const Text('Cancel'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
               ),
               TextButton(
-                child: Text('Save'),
+                child: const Text('Save'),
                 onPressed: () {
                   setState(() {
                     int index = teamMembers.indexOf(member);
@@ -91,21 +91,21 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
     Widget _buildMemberTile(
         BuildContext context, String member, List<String> teamMembers) {
       return ListTile(
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
             side: BorderSide(color: Colors.white, width: 0.5)),
         title: Text(member,
-            style: TextStyle(
+            style: const TextStyle(
                 color: Colors.white, fontSize: 16, fontFamily: "Minecraft")),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             IconButton(
-              icon: Icon(Icons.edit),
+              icon: const Icon(Icons.edit),
               color: Colors.white,
               onPressed: () => _editMemberDialog(context, member, teamMembers),
             ),
             IconButton(
-              icon: Icon(Icons.delete),
+              icon: const Icon(Icons.delete),
               color: Colors.red,
               onPressed: () {
                 setState(() {
@@ -120,76 +120,114 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Teams"),
+        title: const Text("Teams"),
         backgroundColor: Colors.black12,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Text('Team 1',
-                  style: TextStyle(fontSize: 20, color: Colors.blue)),
-            ),
-            for (String member in _team1Members)
-              _buildMemberTile(context, member, _team1Members),
-            ListTile(
-              shape: RoundedRectangleBorder(
-                side: BorderSide(color: Colors.white),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 16.0),
+                child: Text('Team 1',
+                    style: TextStyle(fontSize: 20, color: Colors.blue)),
               ),
-              title: TextField(
-                controller: _team1Controller,
-                style: TextStyle(
-                    color: Colors.white, fontSize: 14, fontFamily: "Minecraft"),
-                decoration: InputDecoration(
-                  labelText: 'Team 1 Member',
-                  labelStyle: TextStyle(color: Colors.white, fontSize: 12),
+              for (String member in _team1Members)
+                _buildMemberTile(context, member, _team1Members),
+              ListTile(
+                shape: const RoundedRectangleBorder(
+                  side: BorderSide(color: Colors.white),
+                ),
+                title: TextField(
+                  controller: _team1Controller,
+                  onSubmitted: (_) {
+                    _addMemberToTeam1();
+                  },
+                  textInputAction: TextInputAction.done,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontFamily: "Minecraft"),
+                  decoration: const InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blue),
+                    ),
+                    labelText: 'Team 1 Member',
+                    labelStyle: TextStyle(color: Colors.white, fontSize: 12),
+                  ),
+                ),
+                trailing: ValueListenableBuilder<TextEditingValue>(
+                  valueListenable: _team1Controller,
+                  builder: (BuildContext context, TextEditingValue value, Widget? child) {
+                    return IconButton(
+                      onPressed: value.text.isNotEmpty ? _addMemberToTeam1 : null,
+                      icon: Icon(Icons.add, color: value.text.isNotEmpty ? Colors.white : Colors.grey),
+                    );
+                  },
                 ),
               ),
-              trailing: IconButton(
-                onPressed: _addMemberToTeam1,
-                icon: const Icon(Icons.add),
+              const SizedBox(height: 20),
+              const Divider(
                 color: Colors.white,
+                thickness: 2.0,
               ),
-            ),
-            SizedBox(height: 20),
-            Divider(
-              color: Colors.white,
-              thickness: 2.0,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: Text('Team 2',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.red,
-                  )),
-            ),
-            for (String member in _team2Members)
-              _buildMemberTile(context, member, _team2Members),
-            ListTile(
-              shape: RoundedRectangleBorder(
-                side: BorderSide(color: Colors.white),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 16.0),
+                child: Text('Team 2',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.red,
+                    )),
               ),
-              title: TextField(
-                style: TextStyle(
-                    color: Colors.white, fontSize: 14, fontFamily: "Minecraft"),
-                controller: _team2Controller,
-                decoration: InputDecoration(
+              for (String member in _team2Members)
+                _buildMemberTile(context, member, _team2Members),
+              ListTile(
+                shape: const RoundedRectangleBorder(
+                  side: BorderSide(color: Colors.white),
+                ),
+                title: TextField(
+
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontFamily: "Minecraft"),
+                  controller: _team2Controller,
+                  decoration: const InputDecoration(
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.red),
+                    ),
                     labelText: 'Team 2 Member',
                     labelStyle: TextStyle(
                       color: Colors.white,
                       fontSize: 12,
-                    )),
+                    ),
+                  ),
+
+                  onSubmitted: (_) {
+                    _addMemberToTeam2();
+                  },
+                  textInputAction: TextInputAction.done,
+                ),
+                trailing: ValueListenableBuilder<TextEditingValue>(
+                  valueListenable: _team2Controller,
+                  builder: (BuildContext context, TextEditingValue value, Widget? child) {
+                    return IconButton(
+                      onPressed: value.text.isNotEmpty ? _addMemberToTeam2 : null,
+                      icon: Icon(Icons.add, color: value.text.isNotEmpty ? Colors.white : Colors.grey),
+                    );
+                  },
+                ),
               ),
-              trailing: IconButton(
-                onPressed: _addMemberToTeam2,
-                icon: Icon(Icons.add),
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(height: 150),
-          ],
+              const SizedBox(height: 150),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -204,15 +242,15 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
                 }
               }
             : () => _showSnackbar(context),
-        label: Text(
+        label: const Text(
           'Next',
           style: TextStyle(color: Colors.black),
         ),
-        icon: Icon(
+        icon: const Icon(
           Icons.arrow_forward,
           color: Colors.black,
         ),
-        backgroundColor: Color.fromRGBO(188, 188, 188, 1),
+        backgroundColor: const Color.fromRGBO(188, 188, 188, 1),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

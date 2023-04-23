@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:pongoapp/screens/teamlist_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../providers/gamedata_provider.dart';
 
@@ -62,76 +63,97 @@ class GamemodeCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     final gameDataProvider =
         Provider.of<GameDataProvider>(context, listen: false);
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          CarouselSlider.builder(
-            itemCount: gamemodes.length,
-            itemBuilder: (BuildContext context, int index, int pageViewIndex) {
-              return Container(
-                margin: EdgeInsets.symmetric(horizontal: 8.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: Color.fromARGB(255, 42, 42, 42),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      gamemodes[index]['image'],
-                      height: 150,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        CarouselSlider.builder(
+          itemCount: gamemodes.length,
+          itemBuilder: (BuildContext context, int index, int pageViewIndex) {
+            return Container(
+              margin: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                color: Color.fromARGB(255, 42, 42, 42),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    gamemodes[index]['image'],
+                    height: 150,
+                  ),
+                  Text(
+                    gamemodes[index]['title'],
+                    style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
-                    Text(
-                      gamemodes[index]['title'],
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                  ),
+                  SizedBox(height: 16.0),
+                  Text(
+                    gamemodes[index]['description'],
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontFamily: "Minecraft",
+                      fontSize: 14.0,
+                      color: Colors.white,
                     ),
-                    SizedBox(height: 16.0),
-                    Text(
-                      gamemodes[index]['description'],
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: "Minecraft",
-                        fontSize: 14.0,
-                        color: Colors.white,
-                      ),
-                    ),
-                    SizedBox(height: 16.0),
+                  ),
+                  SizedBox(height: 16.0),
+                  Stack(children: [
                     ElevatedButton(
                       onPressed: gamemodes[index]["isLocked"]
-                          ? null
+                          ? () async {
+                              final Uri url = Uri.parse(
+                                  'https://play.google.com/store/games');
+                              if (await canLaunchUrl(url)) {
+                                await launchUrl(url);
+                              } else {
+                                throw "Could not launch $url";
+                              }
+                            }
                           : () {
-                              gameDataProvider
-                                  .updateGamemode(gamemodes[index]['title']);
+                              gameDataProvider.updateGamemode(
+                                  gamemodes[index]['title']);
                               Navigator.pushNamed(
                                   context, TeamListsWidget.routeName);
                             },
-                      child: Text("Choose"),
+                      child: !gamemodes[index]["isLocked"]
+                          ? Text("Choose")
+                          : Text("Get Premium"),
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.black,
-                        backgroundColor:
-                            gamemodes[index]["isLocked"] ? Colors.grey : null,
+                        backgroundColor: gamemodes[index]["isLocked"]
+                            ? Colors.grey
+                            : null,
                       ),
-                    )
-                  ],
-                ),
-              );
-            },
-            options: CarouselOptions(
-              height: 380.0,
-              autoPlay: false,
-              autoPlayInterval: Duration(seconds: 3),
-              viewportFraction: 0.8,
-              enlargeCenterPage: true,
-            ),
+                    ),
+                    if (gamemodes[index]["isLocked"])
+                      Positioned(
+                        right: -22,
+                        top:-5,
+                        child: Image.asset(
+                          "assets/images/diamond.png",
+                          height: 40,
+                        ),
+                      ),
+                  ])
+                ],
+              ),
+            );
+          },
+          options: CarouselOptions(
+            height: 450,
+            autoPlay: false,
+            autoPlayInterval: Duration(seconds: 3),
+            viewportFraction: 0.8,
+            enlargeCenterPage: true,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

@@ -115,9 +115,12 @@ class _GameboardScreenState extends State<GameboardScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(
-                'Team 1 - ${gameDataProvider.gameData.numberOfCups} Becher übrig',
-                style: TextStyle(fontSize: 12, color: Colors.white),
+              Transform.rotate(
+                angle: 3.14159265359,
+                child: Text(
+                  'Team 1 - ${gameDataProvider.gameData.numberOfCups} Becher übrig',
+                  style: TextStyle(fontSize: 12, color: Colors.white),
+                ),
               ),
               BeerPongField(
                 cups: gameDataProvider.gameData.numberOfCups,
@@ -125,10 +128,6 @@ class _GameboardScreenState extends State<GameboardScreen> {
               Text(
                 '${_elapsedSeconds ~/ 60}:${(_elapsedSeconds % 60).toString().padLeft(2, '0')}',
                 style: TextStyle(fontSize: 24, color: Colors.white),
-              ),
-              Text(
-                'Team 2  - ${gameDataProvider.gameData.numberOfCups} Becher übrig',
-                style: TextStyle(fontSize: 12, color: Colors.white),
               ),
               showButton
                   ? ElevatedButton(
@@ -148,6 +147,10 @@ class _GameboardScreenState extends State<GameboardScreen> {
                 child: BeerPongField(
                   cups: gameDataProvider.gameData.numberOfCups,
                 ),
+              ),
+              Text(
+                'Team 2 - ${gameDataProvider.gameData.numberOfCups} Becher übrig',
+                style: TextStyle(fontSize: 12, color: Colors.white),
               ),
             ],
           ),

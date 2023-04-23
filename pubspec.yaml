@@ -76,6 +76,7 @@ flutter:
     - assets/images/memory.png
     - assets/images/uk_flag.png
     - assets/images/germany_flag.jpeg
+    - assets/images/diamond.png
   fonts:
     - family: PressStart
       fonts:
