@@ -100,65 +100,37 @@ class _BeerPongFieldState extends State<BeerPongField> {
   }
 
   void _onButtonPress(
-    ValueNotifier<Color> colorNotifier,
-    GameDataProvider gameDataProvider,
-    ValueNotifier<int> remainingCupsTeam1,
-    ValueNotifier<int> remainingCupsTeam2,
-  ) {
-    if (colorNotifier.value != Colors.white10) {
-      if (!widget.showButton && !widget.showFortuneBar) {
-        String challengeType = gameDataProvider.gameData.challenges;
+      ValueNotifier<Color> colorNotifier,
+      GameDataProvider gameDataProvider,
+      ValueNotifier<int> remainingCupsTeam1,
+      ValueNotifier<int> remainingCupsTeam2,
+      ) {
+    if (colorNotifier.value == Colors.white10) {
+      colorNotifier.value = widget.cupColor;
+      String team = widget.cupColor == Colors.red ? 'team2' : 'team1';
+      if (team == 'team1') {
+        remainingCupsTeam1.value += 1;
+      } else {
+        remainingCupsTeam2.value += 1;
+      }
+    } else if (!widget.showButton && !widget.showFortuneBar) {
+      String challengeType = gameDataProvider.gameData.challenges;
 
-        int randomIndexQuiz = random.nextInt(data[0]["quiz"].length);
-        int randomIndexTruthOrDare =
-            random.nextInt(data[0]["truthordare"].length);
-        int randomIndexGetActive = random.nextInt(data[0]["getactive"].length);
+      int randomIndexQuiz = random.nextInt(data[0]["quiz"].length);
+      int randomIndexTruthOrDare = random.nextInt(data[0]["truthordare"].length);
+      int randomIndexGetActive = random.nextInt(data[0]["getactive"].length);
 
-        Widget content;
+      Widget content;
 
-        if (challengeType == "Quiz") {
-          bool showAnswer = false;
-          List<String> questionAndAnswer =
-              getQuestionAndAnswer(randomIndexQuiz);
-          content = StatefulBuilder(builder: (context, setState) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  "Frage:\n\n${questionAndAnswer[0]}",
-                  style: TextStyle(
-                    fontFamily: "Minecraft",
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                showAnswer
-                    ? Text(
-                        "Antwort:\n ${questionAndAnswer[1]}",
-                        style: TextStyle(
-                          fontFamily: "Minecraft",
-                        ),
-                      )
-                    : TextButton(
-                        onPressed: () {
-                          setState(() {
-                            showAnswer = true;
-                          });
-                        },
-                        child: Text("Antwort zeigen"),
-                      ),
-              ],
-            );
-          });
-        } else if (challengeType == "Truth or Dare") {
-          List<String> truthAndDare = getTruthOrDare(randomIndexTruthOrDare);
-          content = Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+      if (challengeType == "Quiz") {
+        bool showAnswer = false;
+        List<String> questionAndAnswer = getQuestionAndAnswer(randomIndexQuiz);
+        content = StatefulBuilder(builder: (context, setState) {
+          return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "Wahrheit:\n${truthAndDare[0]}",
+                "Frage:\n\n${questionAndAnswer[0]}",
                 style: TextStyle(
                   fontFamily: "Minecraft",
                 ),
@@ -166,54 +138,86 @@ class _BeerPongFieldState extends State<BeerPongField> {
               SizedBox(
                 height: 20,
               ),
-              Text(
-                "Pflicht:\n${truthAndDare[1]}",
+              showAnswer
+                  ? Text(
+                "Antwort:\n ${questionAndAnswer[1]}",
                 style: TextStyle(
                   fontFamily: "Minecraft",
                 ),
+              )
+                  : TextButton(
+                onPressed: () {
+                  setState(() {
+                    showAnswer = true;
+                  });
+                },
+                child: Text("Antwort zeigen"),
               ),
             ],
           );
-        } else if (challengeType == "Get active") {
-          String getActive = getGetActive(randomIndexGetActive);
-          content = Text(getActive,
+        });
+      } else if (challengeType == "Truth or Dare") {
+        List<String> truthAndDare = getTruthOrDare(randomIndexTruthOrDare);
+        content = Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "Wahrheit:\n${truthAndDare[0]}",
               style: TextStyle(
                 fontFamily: "Minecraft",
-              ));
-        } else {
-          content = Text("Invalid challenge type");
-        }
-
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text(challengeType),
-              content: SizedBox(child: content),
-              actions: <Widget>[
-                TextButton(
-                  child: Text('Weiter'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "Pflicht:\n${truthAndDare[1]}",
+              style: TextStyle(
+                fontFamily: "Minecraft",
+              ),
+            ),
+          ],
         );
-        colorNotifier.value = Colors.white10;
-
-        String team = widget.cupColor == Colors.red ? 'team2' : 'team1';
-        if (team == 'team1') {
-          remainingCupsTeam1.value -= 1;
-        } else {
-          remainingCupsTeam2.value -= 1;
-        }
+      } else if (challengeType == "Get active") {
+        String getActive = getGetActive(randomIndexGetActive);
+        content = Text(getActive,
+            style: TextStyle(
+              fontFamily: "Minecraft",
+            ));
       } else {
-        colorNotifier.value = widget.cupColor;
+        content = Text("Invalid challenge type");
+      }
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(challengeType),
+            content: SizedBox(child: content),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Weiter'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+      colorNotifier.value = Colors.white10;
+
+      String team = widget.cupColor == Colors.red ? 'team2' : 'team1';
+      if (team == 'team1') {
+        remainingCupsTeam1.value -= 1;
+      } else {
+        remainingCupsTeam2.value -= 1;
       }
     }
   }
+
+
 
   Widget _buildCup(GameDataProvider gameDataProvider) {
     ValueNotifier<Color> colorNotifier = ValueNotifier<Color>(widget.cupColor);
@@ -241,6 +245,7 @@ class _BeerPongFieldState extends State<BeerPongField> {
       ),
     );
   }
+
 
   List<Widget> _buildPyramid(GameDataProvider gameDataProvider) {
     List<Widget> pyramid = [];
