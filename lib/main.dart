@@ -10,12 +10,12 @@ import 'package:pongoapp/screens/tauziehen_screen.dart';
 import 'package:pongoapp/screens/teamlist_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'helpers/locator.dart';
+
 import 'screens/gamemode_screen.dart';
 
 
 void main() async {
-  setupLocator();
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 

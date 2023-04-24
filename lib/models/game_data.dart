@@ -1,12 +1,13 @@
 class GameData {
   String gamemode;
-  List<String> team1;
-  List<String> team2;
   int numberOfCups;
   bool allowReracks;
   String challenges;
   String level;
+  List<String> team1;
+  List<String> team2;
   String beginner;
+  Map<String, int>? remainingCups;
 
   GameData({
     required this.gamemode,
@@ -17,5 +18,10 @@ class GameData {
     required this.team1,
     required this.team2,
     required this.beginner,
-  });
+  }) {
+    remainingCups = {
+      'team1': numberOfCups,
+      'team2': numberOfCups,
+    };
+  }
 }

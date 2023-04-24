@@ -4,20 +4,22 @@ import 'package:flutter/material.dart';
 import 'package:pongoapp/providers/gamedata_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../helpers/locator.dart';
-
 class BeerPongField extends StatefulWidget {
   final int cups;
-  int _elapsedSeconds = 0;
-  bool showButton;
-  bool showFortuneBar;
+  final bool showButton;
+  final bool showFortuneBar;
   final Color cupColor;
+  final ValueNotifier<int> remainingCupsTeam1;
+  final ValueNotifier<int> remainingCupsTeam2;
 
-  BeerPongField(
-      {required this.cups,
-      required this.showButton,
-      required this.showFortuneBar,
-      this.cupColor = Colors.red});
+  BeerPongField({
+    required this.cups,
+    required this.showButton,
+    required this.showFortuneBar,
+    this.cupColor = Colors.red,
+    required this.remainingCupsTeam1,
+    required this.remainingCupsTeam2,
+  });
 
   @override
   _BeerPongFieldState createState() => _BeerPongFieldState();
@@ -100,7 +102,8 @@ class _BeerPongFieldState extends State<BeerPongField> {
   void _onButtonPress(
     ValueNotifier<Color> colorNotifier,
     GameDataProvider gameDataProvider,
-
+    ValueNotifier<int> remainingCupsTeam1,
+    ValueNotifier<int> remainingCupsTeam2,
   ) {
     if (colorNotifier.value != Colors.white10) {
       if (!widget.showButton && !widget.showFortuneBar) {
@@ -199,9 +202,16 @@ class _BeerPongFieldState extends State<BeerPongField> {
           },
         );
         colorNotifier.value = Colors.white10;
+
+        String team = widget.cupColor == Colors.red ? 'team2' : 'team1';
+        if (team == 'team1') {
+          remainingCupsTeam1.value -= 1;
+        } else {
+          remainingCupsTeam2.value -= 1;
+        }
+      } else {
+        colorNotifier.value = widget.cupColor;
       }
-    } else {
-      colorNotifier.value = widget.cupColor;
     }
   }
 
@@ -217,6 +227,8 @@ class _BeerPongFieldState extends State<BeerPongField> {
             onPressed: () => _onButtonPress(
               colorNotifier,
               gameDataProvider,
+              widget.remainingCupsTeam1,
+              widget.remainingCupsTeam2,
             ),
             child: Text(''),
             style: ElevatedButton.styleFrom(

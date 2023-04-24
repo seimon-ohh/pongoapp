@@ -20,7 +20,37 @@ class GameboardScreen extends StatefulWidget {
 class _GameboardScreenState extends State<GameboardScreen> {
   bool showButton = true;
   bool showFortuneBar = false;
+  // Deklaration der ValueNotifier mit 'late'
+   late ValueNotifier<int> remainingCupsTeam1;
+   late ValueNotifier<int> remainingCupsTeam2;
+  @override
+  void initState() {
+    super.initState();
+    final gameDataProvider =
+    Provider.of<GameDataProvider>(context, listen: false);
+    remainingCupsTeam1 =
+        ValueNotifier<int>(gameDataProvider.gameData.numberOfCups);
+    remainingCupsTeam2 =
+        ValueNotifier<int>(gameDataProvider.gameData.numberOfCups);
+  }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (remainingCupsTeam1 == null || remainingCupsTeam2 == null) {
+      final gameDataProvider = Provider.of<GameDataProvider>(context, listen: false);
+      remainingCupsTeam1 = ValueNotifier<int>(gameDataProvider.getRemainingCups("team1"));
+      remainingCupsTeam2 = ValueNotifier<int>(gameDataProvider.getRemainingCups("team2"));
+    }
+  }
+
+  @override
+  void dispose() {
+    // Dispose ValueNotifier, um Ressourcen freizugeben
+    remainingCupsTeam1.dispose();
+    remainingCupsTeam2.dispose();
+    super.dispose();
+  }
 
   Future<bool> showExitConfirmationDialog() async {
     return await showDialog(
@@ -86,7 +116,7 @@ class _GameboardScreenState extends State<GameboardScreen> {
   @override
   Widget build(BuildContext context) {
     final gameDataProvider =
-        Provider.of<GameDataProvider>(context, listen: false);
+        Provider.of<GameDataProvider>(context, listen: true);
 
     void onPress() {
       setState(() {
@@ -104,10 +134,15 @@ class _GameboardScreenState extends State<GameboardScreen> {
             children: [
               SizedBox(height: 10,),
               Transform.rotate(
-                angle: 3.14159265359,
-                child: Text(
-                  'Team 1 - ${gameDataProvider.gameData.numberOfCups} Becher übrig',
-                  style: TextStyle(fontSize: 12, color: Colors.white),
+                angle: math.pi,
+                child: ValueListenableBuilder<int>(
+                  valueListenable: remainingCupsTeam1,
+                  builder: (context, value, child) {
+                    return Text(
+                      'Team 1 - $value Becher übrig',
+                      style: TextStyle(fontSize: 12, color: Colors.white),
+                    );
+                  },
                 ),
               ),
               BeerPongField(
@@ -115,6 +150,8 @@ class _GameboardScreenState extends State<GameboardScreen> {
                 showFortuneBar: showFortuneBar,
                 showButton: showButton,
                 cupColor: Colors.blue,
+                remainingCupsTeam1: remainingCupsTeam1,
+                remainingCupsTeam2: remainingCupsTeam2,
               ),
               SizedBox(
                 height: 120,
@@ -165,12 +202,20 @@ class _GameboardScreenState extends State<GameboardScreen> {
                 angle: 3.14159265359,
                 child: BeerPongField(
                   cups: gameDataProvider.gameData.numberOfCups,
-                  showButton: showButton, showFortuneBar: showButton,
+                  showButton: showButton,
+                  showFortuneBar: showButton,
+                  remainingCupsTeam1: remainingCupsTeam1,
+                  remainingCupsTeam2: remainingCupsTeam2,
                 ),
               ),
-              Text(
-                'Team 2 - ${gameDataProvider.gameData.numberOfCups} Becher übrig',
-                style: TextStyle(fontSize: 12, color: Colors.white),
+              ValueListenableBuilder<int>(
+                valueListenable: remainingCupsTeam2,
+                builder: (context, value, child) {
+                  return Text(
+                    'Team 2 - $value Becher übrig',
+                    style: TextStyle(fontSize: 12, color: Colors.white),
+                  );
+                },
               ),
             ],
           ),

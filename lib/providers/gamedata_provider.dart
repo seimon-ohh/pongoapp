@@ -11,10 +11,20 @@ class GameDataProvider extends ChangeNotifier {
     level: "",
     team1: [],
     team2: [],
-    beginner:"",
+    beginner: "",
   );
 
   GameData get gameData => _gameData;
+
+  void updateRemainingCups(String team, int cups) {
+    _gameData.remainingCups?[team] = cups;
+    notifyListeners();
+  }
+
+  int getRemainingCups(String team) {
+    return _gameData.remainingCups?[team] ?? 0;
+  }
+
 
   void updateGamemode(String newGamemode) {
     _gameData.gamemode = newGamemode;
@@ -32,18 +42,18 @@ class GameDataProvider extends ChangeNotifier {
     _gameData.numberOfCups = newNumber;
     notifyListeners();
   }
-void updateAllowReracks (bool newBool){
+  void updateAllowReracks (bool newBool){
     _gameData.allowReracks = newBool;
-}
-void updateChallenges(String newChallengesType){
+  }
+  void updateChallenges(String newChallengesType){
     _gameData.challenges = newChallengesType;
-}
-void updateLevel (String newLevel){
+  }
+  void updateLevel (String newLevel){
     _gameData.level=newLevel;
-}
-void updateBeginner (String beginner){
+  }
+  void updateBeginner (String beginner){
     _gameData.beginner = beginner;
-}
+  }
 
 
 
