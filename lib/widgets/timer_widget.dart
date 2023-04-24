@@ -44,7 +44,7 @@ class _GameTimerState extends State<GameTimer> {
       child: Text(
         '${_elapsedSeconds ~/ 60}:${(_elapsedSeconds % 60).toString().padLeft(2, '0')}',
         maxLines: 1,
-        overflow: TextOverflow.ellipsis,
+
         style: TextStyle(fontSize: 24, color: Colors.white),
       ),
     );

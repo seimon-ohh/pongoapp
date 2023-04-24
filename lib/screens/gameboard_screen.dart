@@ -111,45 +111,50 @@ class _GameboardScreenState extends State<GameboardScreen> {
               ),
               BeerPongField(
                 cups: gameDataProvider.gameData.numberOfCups,
+                showFortuneBar: showFortuneBar,
+                showButton: showButton,
               ),
-              Row(
+              SizedBox(
+                height: 120,
+                child: Row(
 
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: LayoutBuilder(
-                      builder: (BuildContext context, BoxConstraints constraints) {
-                        return SizedBox(
-                          width: double.infinity,
-                          height: constraints.maxWidth,
-                          child: Align(
-                            alignment: Alignment.centerLeft, // Zentriert den gedrehten Text innerhalb der SizedBox
-                            child:!showButton &&!showFortuneBar? const GameTimer():null,
-                          ),
-                        );
-                      },
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: LayoutBuilder(
+                        builder: (BuildContext context, BoxConstraints constraints) {
+                          return SizedBox(
+                            width: double.infinity,
+                            height: constraints.maxWidth,
+                            child: Align(
+                              alignment: Alignment.centerLeft, // Zentriert den gedrehten Text innerhalb der SizedBox
+                              child:!showButton &&!showFortuneBar? const GameTimer():null,
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 4,
-                    child: Center(
-                      child: showButton
-                          ? ElevatedButton(
-                        onPressed: onPress,
-                        child: Text('Start',),
-                      )
-                          : showFortuneBar
-                          ? FortuneBarWidget(
-                            selected: (name) {
-                              gameDataProvider.updateBeginner(name);
-                              showBeginnerPopup(name);
-                            },
-                          )
-                          : const SizedBox.shrink(),
+                    Expanded(
+                      flex: 4,
+                      child: Center(
+                        child: showButton
+                            ? ElevatedButton(
+                          onPressed: onPress,
+                          child: Text('Start',),
+                        )
+                            : showFortuneBar
+                            ? FortuneBarWidget(
+                              selected: (name) {
+                                gameDataProvider.updateBeginner(name);
+                                showBeginnerPopup(name);
+                              },
+                            )
+                            : const SizedBox.shrink(),
+                      ),
                     ),
-                  ),
-                  Expanded(flex: 2, child: Container()),
-                ],
+                    Expanded(flex: 2, child: Container()),
+                  ],
+                ),
               ),
 
 
@@ -158,6 +163,7 @@ class _GameboardScreenState extends State<GameboardScreen> {
                 angle: 3.14159265359,
                 child: BeerPongField(
                   cups: gameDataProvider.gameData.numberOfCups,
+                  showButton: showButton, showFortuneBar: showButton,
                 ),
               ),
               Text(
