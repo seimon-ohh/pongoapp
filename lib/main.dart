@@ -117,6 +117,7 @@ class BeerPongApp extends StatelessWidget {
         ),
         floatingActionButtonLocation: ExpandableFab.location,
         floatingActionButton: ExpandableFab(
+          collapsedFabSize: ExpandableFabSize.small,
           distance: 50,
           closeButtonStyle:
               ExpandableFabCloseButtonStyle(backgroundColor: Colors.grey),
