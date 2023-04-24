@@ -18,8 +18,8 @@ class _PricingScreenState extends State<PricingScreen> {
           backgroundColor: Colors.black12,
           bottom: TabBar(
             tabs: [
-              Tab(text: 'Tab 1'),
-              Tab(text: 'Tab 2'),
+              Tab(text: 'Pakete'),
+              Tab(text: 'Modis'),
             ],
           ),
         ),
@@ -27,54 +27,316 @@ class _PricingScreenState extends State<PricingScreen> {
           children: [
             // Tab 1
             Column(
-              children: [
-                _buildProduct(
-                  icon: Icons.ac_unit,
-                  description: 'Product 1',
-                  price: 9.99,
+              children: <Widget>[
+                Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
+                  child: ListTile(
+                    leading: Image.asset('assets/images/Pongo_blk.png', height: 100),
+                    title: Text('Alle Modi'),
+                    subtitle: Text('Schalte alle Modi frei.', style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                    trailing: SizedBox(
+                      width: 110,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 40,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero,
+                                ),
+                              ),
+                              onPressed: () {},
+                              child: Text('3,99€',style: TextStyle(fontSize:14)),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  ),
                 ),
-                _buildProduct(
-                  icon: Icons.access_alarm,
-                  description: 'Product 2',
-                  price: 19.99,
+                Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
+                  child: ListTile(
+                    leading: Image.asset('assets/images/Pongo_blk.png', height: 100),
+                    title: Text('Alle Spiele'),
+                    subtitle: Text('Schalte alle Spiele frei.', style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                    trailing: SizedBox(
+                      width: 110,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 40,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero,
+                                ),
+                              ),
+                              onPressed: () {},
+                              child: Text('2,99€',style: TextStyle(fontSize:14)),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  ),
                 ),
-                _buildProduct(
-                  icon: Icons.accessibility_new,
-                  description: 'Product 3',
-                  price: 29.99,
+                Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
+                  child: ListTile(
+                    leading: Image.asset('assets/images/Pongo_blk.png', height: 100),
+                    title: Text('Alle Level'),
+                    subtitle: Text('Schalte alle Level frei.', style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                    trailing: SizedBox(
+                      width: 110,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 40,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.green,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.zero,
+                                ),
+                              ),
+                              onPressed: () {},
+                              child: Text('1,49€',style: TextStyle(fontSize:14)),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  ),
                 ),
               ],
             ),
 
             // Tab 2
-            Column(
-              children: [
-                _buildProduct(
-                  icon: Icons.account_balance,
-                  description: 'Product 4',
-                  price: 39.99,
-                ),
-                _buildProduct(
-                  icon: Icons.account_box,
-                  description: 'Product 5',
-                  price: 49.99,
-                ),
-                _buildProduct(
-                  icon: Icons.add_circle_outline,
-                  description: 'Product 6',
-                  price: 59.99,
-                ),
-                _buildProduct(
-                  icon: Icons.airplanemode_active,
-                  description: 'Product 7',
-                  price: 69.99,
-                ),
-                _buildProduct(
-                  icon: Icons.attach_money,
-                  description: 'Product 8',
-                  price: 79.99,
-                ),
-              ],
+            SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
+                    child: ListTile(
+                      leading: Container(child: Image.asset('assets/images/tictactoe.png', height: 100),width: 50),
+                      title: Text('TicTacToe', maxLines: 1),
+                      subtitle: Text('Schalte den Modus Tic Tac Toe frei.', style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                      trailing: SizedBox(
+                        width: 110,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 40,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.green,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero,
+                                  ),
+                                ),
+                                onPressed: () {},
+                                child: Text('1,29€', style: TextStyle(fontSize:14),),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    ),
+                  ),
+                  Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
+                    child: ListTile(
+                      leading: Container(child: Image.asset('assets/images/level.png', height: 100),width: 50),
+                      title: Text('Level'),
+                      subtitle: Text('Schalte den Modus Level frei.',style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                      trailing: SizedBox(
+                        width: 110,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 40,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.green,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero,
+                                  ),
+                                ),
+                                onPressed: () {},
+                                child: Text('1,29€', style: TextStyle(fontSize:14),),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    ),
+                  ),
+                  Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
+                    child: ListTile(
+                      leading: Container(child: Image.asset('assets/images/change.png', height: 100),width: 50),
+                      title: Text('Change'),
+                      subtitle: Text('Schalte den Modus Change frei.', style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                      trailing: SizedBox(
+                        width: 110,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 40,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.green,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero,
+                                  ),
+                                ),
+                                onPressed: () {},
+                                child: Text('1,29€', style: TextStyle(fontSize:14),),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    ),
+                  ),
+                  Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
+                    child: ListTile(
+                      leading: Container(child: Image.asset('assets/images/memory.png', height: 100),width: 50),
+                      title: Text('Memory'),
+                      subtitle: Text('Schalte den Modus Memory frei.', style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                      trailing: SizedBox(
+                        width: 110,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 40,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.green,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero,
+                                  ),
+                                ),
+                                onPressed: () {},
+                                child: Text('1,29€', style: TextStyle(fontSize:14),),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    ),
+                  ),
+                  Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
+                    child: ListTile(
+                      leading: Container(child: Image.asset('assets/images/dart.png', height: 100),width: 50),
+                      title: Text('Darts'),
+                      subtitle: Text('Schalte den Modus Darts frei.', style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                      trailing: SizedBox(
+                        width: 110,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 40,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.green,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero,
+                                  ),
+                                ),
+                                onPressed: () {},
+                                child: Text('1,29€', style: TextStyle(fontSize:14),),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    ),
+                  ),
+                  Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
+                    child: ListTile(
+                      leading: Container(child: Image.asset('assets/images/dart.png', height: 100),width: 50),
+                      title: Text('Extreme'),
+                      subtitle: Text('Schalte das Level Extreme frei.', style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                      trailing: SizedBox(
+                        width: 110,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 40,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.green,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero,
+                                  ),
+                                ),
+                                onPressed: () {},
+                                child: Text('0,99€', style: TextStyle(fontSize:14),),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    ),
+                  ),
+                  Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
+                    child: ListTile(
+                      leading: Container(child: Image.asset('assets/images/dart.png', height: 100),width: 50),
+                      title: Text('Dirty'),
+                      subtitle: Text('Schalte das Level Dirty frei.', style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                      trailing: SizedBox(
+                        width: 110,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 40,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.green,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero,
+                                  ),
+                                ),
+                                onPressed: () {},
+                                child: Text('0,99€', style: TextStyle(fontSize:14),),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -82,32 +344,6 @@ class _PricingScreenState extends State<PricingScreen> {
     );
   }
 
-  Widget _buildProduct(
-      {required IconData icon,
-      required String description,
-      required double price}) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          Icon(icon, color: Colors.white),
-          SizedBox(width: 8.0),
-          Expanded(
-              child: Text(
-                  style: TextStyle(color: Colors.white, fontSize: 10),
-                  description)),
-          Text('\$${price.toStringAsFixed(2)}',
-              style: TextStyle(color: Colors.white, fontSize: 8)),
-          SizedBox(width: 8.0),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-            onPressed: () {
-              // Handle button press
-            },
-            child: Text('Buy'),
-          ),
-        ],
-      ),
-    );
+
   }
-}
+

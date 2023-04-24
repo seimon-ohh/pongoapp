@@ -11,7 +11,7 @@ class _CupGameWidgetState extends State<CupGameWidget> {
   void _moveCupLeft() {
     if (selectedCupIndex > 0) {
       setState(() {
-        selectedCupIndex--;
+        selectedCupIndex++;
       });
     } else {
       _showWinnerDialog();
@@ -21,7 +21,7 @@ class _CupGameWidgetState extends State<CupGameWidget> {
   void _moveCupRight() {
     if (selectedCupIndex < 6) {
       setState(() {
-        selectedCupIndex++;
+        selectedCupIndex--;
       });
     } else {
       _showWinnerDialog();
@@ -63,7 +63,7 @@ class _CupGameWidgetState extends State<CupGameWidget> {
                 child: IconButton(
                   onPressed: _moveCupLeft,
                   icon: Icon(Icons.arrow_back),
-                  color: Colors.red,
+                  color: Colors.blue,
                   iconSize: 60,
                 ),
               ),
@@ -79,7 +79,7 @@ class _CupGameWidgetState extends State<CupGameWidget> {
                 child: IconButton(
                   onPressed: _moveCupRight,
                   icon: Icon(Icons.arrow_forward),
-                  color: Colors.blue,
+                  color: Colors.red,
                   iconSize: 60,
                 ),
               ),

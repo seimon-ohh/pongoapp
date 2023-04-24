@@ -11,10 +11,6 @@ class _TauziehenScreenState extends State<TauziehenScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Tauziehen"),
-          backgroundColor: Colors.black12,
-        ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [Transform.rotate(

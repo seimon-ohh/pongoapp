@@ -102,7 +102,8 @@ class BeerPongApp extends StatelessWidget {
               bottom: 20,
               left: 20,
               child: FloatingActionButton(
-                backgroundColor: Colors.white,
+                mini:true,
+                backgroundColor: Color.fromRGBO(188, 188, 188, 1),
                 onPressed: () {
                   // Hier die Aktion für das Fragezeichen-Icon einfügen
                 },
@@ -119,7 +120,7 @@ class BeerPongApp extends StatelessWidget {
           distance: 50,
           closeButtonStyle:
               ExpandableFabCloseButtonStyle(backgroundColor: Colors.grey),
-          backgroundColor: Colors.white,
+          backgroundColor: Color.fromRGBO(188, 188, 188, 1),
           foregroundColor: Colors.black,
           child: Icon(Icons.language),
           children: [
