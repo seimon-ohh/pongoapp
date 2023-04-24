@@ -19,9 +19,9 @@ class BeerPongField extends StatefulWidget {
 class _BeerPongFieldState extends State<BeerPongField> {
   List<Map<String, dynamic>> data = [];
 
-@override
+  @override
   void initState() {
-   fetchData();
+    fetchData();
     super.initState();
   }
 
@@ -30,9 +30,7 @@ class _BeerPongFieldState extends State<BeerPongField> {
     setState(() {
       data = fetchedData;
     });
-
   }
-
 
   Future<List<Map<String, dynamic>>> fetchDataFromFirestore() async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -55,7 +53,6 @@ class _BeerPongFieldState extends State<BeerPongField> {
 
   final Random random = Random();
 
-
   List<String> getQuestionAndAnswer(int index) {
     if (data.isEmpty || data[0]["quiz"] == null) {
       return ["No quiz data available", ""];
@@ -69,26 +66,114 @@ class _BeerPongFieldState extends State<BeerPongField> {
     }
   }
 
+  List<String> getTruthOrDare(int index) {
+    if (data.isEmpty || data[0]["truthordare"] == null) {
+      return ["No Truth or Dare data available", ""];
+    } else if (index < 0 || index >= data[0]["truthordare"].length) {
+      return ["Invalid index", ""];
+    } else {
+      Map<String, dynamic> truthOrDareEntry = data[0]["truthordare"][index];
+      String truth = truthOrDareEntry["truth"];
+      String dare = truthOrDareEntry["dare"];
+      return [truth, dare];
+    }
+  }
+
+  String getGetActive(int index) {
+    if (data.isEmpty || data[0]["getactive"] == null) {
+      return "No Get Active data available";
+    } else if (index < 0 || index >= data[0]["getactive"].length) {
+      return "Invalid index";
+    } else {
+      String getActiveEntry = data[0]["getactive"][index];
+      return getActiveEntry;
+    }
+  }
 
   void _onButtonPress(
       ValueNotifier<Color> colorNotifier, GameDataProvider gameDataProvider) {
-    List<String> questionAndAnswer = getQuestionAndAnswer(1);
+    String challengeType = gameDataProvider.gameData.challenges;
+
+    int randomIndexQuiz = random.nextInt(data[0]["quiz"].length);
+    int randomIndexTruthOrDare = random.nextInt(data[0]["truthordare"].length);
+    int randomIndexGetActive = random.nextInt(data[0]["getactive"].length);
+
+    Widget content;
+
+    if (challengeType == "Quiz") {
+      bool showAnswer = false;
+      List<String> questionAndAnswer = getQuestionAndAnswer(randomIndexQuiz);
+      content = StatefulBuilder(builder: (context, setState) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "Frage:\n\n${questionAndAnswer[0]}",
+              style: TextStyle(
+                fontFamily: "Minecraft",
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            showAnswer
+                ? Text(
+                    "Antwort:\n ${questionAndAnswer[1]}",
+                    style: TextStyle(
+                      fontFamily: "Minecraft",
+                    ),
+                  )
+                : TextButton(
+                    onPressed: () {
+                      setState(() {
+                        showAnswer = true;
+                      });
+                    },
+                    child: Text("Antwort zeigen"),
+                  ),
+          ],
+        );
+      });
+    } else if (challengeType == "Truth or Dare") {
+      List<String> truthAndDare = getTruthOrDare(randomIndexTruthOrDare);
+      content = Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            "Wahrheit:\n${truthAndDare[0]}",
+            style: TextStyle(
+              fontFamily: "Minecraft",
+            ),
+          ),
+          SizedBox(height: 20,),
+          Text(
+            "Pflicht:\n${truthAndDare[1]}",
+            style: TextStyle(
+              fontFamily: "Minecraft",
+            ),
+          ),
+        ],
+      );
+    } else if (challengeType == "Get active") {
+      String getActive = getGetActive(randomIndexGetActive);
+      content = Text(getActive,
+          style: TextStyle(
+            fontFamily: "Minecraft",
+          ));
+    } else {
+      content = Text("Invalid challenge type");
+    }
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(gameDataProvider.gameData.challenges),
-          content: Column(
-
-            children: [
-              Text("Question: ${questionAndAnswer[0]}"),
-              Text("Answer: ${questionAndAnswer[1]}")
-            ],
-          ),
+          title: Text(challengeType),
+          content: SizedBox(child: content),
           actions: <Widget>[
             TextButton(
-              child: Text('Close'),
+              child: Text('Weiter'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -145,7 +230,6 @@ class _BeerPongFieldState extends State<BeerPongField> {
   Widget build(BuildContext context) {
     final gameDataProvider =
         Provider.of<GameDataProvider>(context, listen: false);
-
 
     return Column(children: _buildPyramid(gameDataProvider));
   }

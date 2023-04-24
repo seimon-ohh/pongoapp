@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/gamedata_provider.dart';
 import '../widgets/fortunebar.dart';
+import 'dart:math' as math;
 
 class GameboardScreen extends StatefulWidget {
   static const routeName = "/gameboard-screen";
@@ -125,23 +126,55 @@ class _GameboardScreenState extends State<GameboardScreen> {
               BeerPongField(
                 cups: gameDataProvider.gameData.numberOfCups,
               ),
-              Text(
-                '${_elapsedSeconds ~/ 60}:${(_elapsedSeconds % 60).toString().padLeft(2, '0')}',
-                style: TextStyle(fontSize: 24, color: Colors.white),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: LayoutBuilder(
+                      builder: (BuildContext context, BoxConstraints constraints) {
+                        return SizedBox(
+                          width: double.infinity,
+                          height: constraints.maxWidth,
+                          child: Align(
+                            alignment: Alignment.centerLeft, // Zentriert den gedrehten Text innerhalb der SizedBox
+                            child: Transform.rotate(
+                              angle: -math.pi / 2,
+                              child: Text(
+                                '${_elapsedSeconds ~/ 60}:${(_elapsedSeconds % 60).toString().padLeft(2, '0')}',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(fontSize: 24, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Center(
+                      child: showButton
+                          ? ElevatedButton(
+                        onPressed: onPress,
+                        child: Text('Start Game'),
+                      )
+                          : showFortuneBar
+                          ? FortuneBarWidget(
+                            selected: (name) {
+                              gameDataProvider.updateBeginner(name);
+                              showBeginnerPopup(name);
+                            },
+                          )
+                          : const SizedBox.shrink(),
+                    ),
+                  ),
+                  Expanded(flex: 1, child: Container()),
+                ],
               ),
-              showButton
-                  ? ElevatedButton(
-                      onPressed: onPress,
-                      child: Text('Start Game'),
-                    )
-                  : showFortuneBar
-                      ? FortuneBarWidget(
-                          selected: (name) {
-                            gameDataProvider.updateBeginner(name);
-                            showBeginnerPopup(name);
-                          },
-                        )
-                      : const SizedBox.shrink(),
+
+
+
               Transform.rotate(
                 angle: 3.14159265359,
                 child: BeerPongField(
