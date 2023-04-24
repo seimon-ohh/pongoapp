@@ -9,7 +9,7 @@ class _CupGameWidgetState extends State<CupGameWidget> {
   int selectedCupIndex = 3;
 
   void _moveCupLeft() {
-    if (selectedCupIndex > 0) {
+    if (selectedCupIndex < 6) {
       setState(() {
         selectedCupIndex++;
       });
@@ -19,7 +19,7 @@ class _CupGameWidgetState extends State<CupGameWidget> {
   }
 
   void _moveCupRight() {
-    if (selectedCupIndex < 6) {
+    if (selectedCupIndex > 0) {
       setState(() {
         selectedCupIndex--;
       });
@@ -59,7 +59,7 @@ class _CupGameWidgetState extends State<CupGameWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               RotationTransition(
-                turns: AlwaysStoppedAnimation(selectedCupIndex > 0 ? -0.25 : 0),
+                turns: AlwaysStoppedAnimation(-0.25),
                 child: IconButton(
                   onPressed: _moveCupLeft,
                   icon: Icon(Icons.arrow_back),
@@ -75,7 +75,7 @@ class _CupGameWidgetState extends State<CupGameWidget> {
               ),
               SizedBox(width: 16),
               RotationTransition(
-                turns: AlwaysStoppedAnimation(selectedCupIndex < 6 ? 0.75 : 0.5),
+                turns: AlwaysStoppedAnimation(selectedCupIndex < 6 ? 0.75 : -0.25),
                 child: IconButton(
                   onPressed: _moveCupRight,
                   icon: Icon(Icons.arrow_forward),

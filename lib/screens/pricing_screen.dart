@@ -31,9 +31,9 @@ class _PricingScreenState extends State<PricingScreen> {
                 Card(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
                   child: ListTile(
-                    leading: Image.asset('assets/images/Pongo_blk.png', height: 100),
+                    leading: Container(child: Image.asset('assets/images/Pongo_blk.png', height: 100),width: 50),
                     title: Text('Alle Modi'),
-                    subtitle: Text('Schalte alle Modi frei.', style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                    subtitle: Text('Schalte alle Modi frei.', style: TextStyle(fontSize: 12, fontFamily: "Minecraft")),
                     trailing: SizedBox(
                       width: 110,
                       child: Column(
@@ -55,15 +55,15 @@ class _PricingScreenState extends State<PricingScreen> {
                         ],
                       ),
                     ),
-                    contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                   ),
                 ),
                 Card(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
                   child: ListTile(
-                    leading: Image.asset('assets/images/Pongo_blk.png', height: 100),
-                    title: Text('Alle Spiele'),
-                    subtitle: Text('Schalte alle Spiele frei.', style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                    leading: Container(child: Image.asset('assets/images/Pongo_blk.png', height: 100),width: 50),
+                    title: Text('Alle Spiele',maxLines: 1),
+                    subtitle: Text('Schalte alle Spiele frei.', style: TextStyle(fontSize: 12, fontFamily: "Minecraft")),
                     trailing: SizedBox(
                       width: 110,
                       child: Column(
@@ -85,15 +85,15 @@ class _PricingScreenState extends State<PricingScreen> {
                         ],
                       ),
                     ),
-                    contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                   ),
                 ),
                 Card(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
                   child: ListTile(
-                    leading: Image.asset('assets/images/Pongo_blk.png', height: 100),
+                    leading: Container(child: Stack(children: [Image.asset('assets/images/Pongo_blk.png', height: 100),Image.asset('assets/images/levels_badge.png', height: 100),]),width: 50),
                     title: Text('Alle Level'),
-                    subtitle: Text('Schalte alle Level frei.', style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                    subtitle: Text('Schalte alle Level frei.', style: TextStyle(fontSize: 12, fontFamily: "Minecraft")),
                     trailing: SizedBox(
                       width: 110,
                       child: Column(
@@ -115,7 +115,7 @@ class _PricingScreenState extends State<PricingScreen> {
                         ],
                       ),
                     ),
-                    contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                   ),
                 ),
               ],
@@ -128,9 +128,9 @@ class _PricingScreenState extends State<PricingScreen> {
                   Card(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
                     child: ListTile(
-                      leading: Container(child: Image.asset('assets/images/tictactoe.png', height: 100),width: 50),
+                      leading: Container(child: Image.asset('assets/images/tictactoe_blk.png', height: 100),width: 50),
                       title: Text('TicTacToe', maxLines: 1),
-                      subtitle: Text('Schalte den Modus Tic Tac Toe frei.', style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                      subtitle: Text('Schalte den Modus Tic Tac Toe frei.', style: TextStyle(fontSize: 12, fontFamily: "Minecraft")),
                       trailing: SizedBox(
                         width: 110,
                         child: Column(
@@ -158,9 +158,9 @@ class _PricingScreenState extends State<PricingScreen> {
                   Card(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
                     child: ListTile(
-                      leading: Container(child: Image.asset('assets/images/level.png', height: 100),width: 50),
+                      leading: Container(child: Image.asset('assets/images/levels_blk.png', height: 100),width: 50),
                       title: Text('Level'),
-                      subtitle: Text('Schalte den Modus Level frei.',style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                      subtitle: Text('Schalte den Modus Level frei.',style: TextStyle(fontSize: 12, fontFamily: "Minecraft")),
                       trailing: SizedBox(
                         width: 110,
                         child: Column(
@@ -188,9 +188,9 @@ class _PricingScreenState extends State<PricingScreen> {
                   Card(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
                     child: ListTile(
-                      leading: Container(child: Image.asset('assets/images/change.png', height: 100),width: 50),
+                      leading: Container(child: Image.asset('assets/images/change_blk.png', height: 100),width: 50),
                       title: Text('Change'),
-                      subtitle: Text('Schalte den Modus Change frei.', style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                      subtitle: Text('Schalte den Modus Change frei.', style: TextStyle(fontSize: 12, fontFamily: "Minecraft")),
                       trailing: SizedBox(
                         width: 110,
                         child: Column(
@@ -220,7 +220,7 @@ class _PricingScreenState extends State<PricingScreen> {
                     child: ListTile(
                       leading: Container(child: Image.asset('assets/images/memory.png', height: 100),width: 50),
                       title: Text('Memory'),
-                      subtitle: Text('Schalte den Modus Memory frei.', style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                      subtitle: Text('Schalte den Modus Memory frei.', style: TextStyle(fontSize: 12, fontFamily: "Minecraft")),
                       trailing: SizedBox(
                         width: 110,
                         child: Column(
@@ -250,7 +250,7 @@ class _PricingScreenState extends State<PricingScreen> {
                     child: ListTile(
                       leading: Container(child: Image.asset('assets/images/dart.png', height: 100),width: 50),
                       title: Text('Darts'),
-                      subtitle: Text('Schalte den Modus Darts frei.', style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                      subtitle: Text('Schalte den Modus Darts frei.', style: TextStyle(fontSize: 12, fontFamily: "Minecraft")),
                       trailing: SizedBox(
                         width: 110,
                         child: Column(
@@ -280,7 +280,7 @@ class _PricingScreenState extends State<PricingScreen> {
                     child: ListTile(
                       leading: Container(child: Image.asset('assets/images/dart.png', height: 100),width: 50),
                       title: Text('Extreme'),
-                      subtitle: Text('Schalte das Level Extreme frei.', style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                      subtitle: Text('Schalte das Level Extreme frei.', style: TextStyle(fontSize: 12, fontFamily: "Minecraft")),
                       trailing: SizedBox(
                         width: 110,
                         child: Column(
@@ -310,7 +310,7 @@ class _PricingScreenState extends State<PricingScreen> {
                     child: ListTile(
                       leading: Container(child: Image.asset('assets/images/dart.png', height: 100),width: 50),
                       title: Text('Dirty'),
-                      subtitle: Text('Schalte das Level Dirty frei.', style: TextStyle(fontSize: 10, fontFamily: "Minecraft")),
+                      subtitle: Text('Schalte das Level Dirty frei.', style: TextStyle(fontSize: 12, fontFamily: "Minecraft")),
                       trailing: SizedBox(
                         width: 110,
                         child: Column(
