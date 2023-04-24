@@ -78,6 +78,7 @@ flutter:
     - assets/images/germany_flag.jpeg
     - assets/images/diamond.png
     - assets/images/Pongo_blk.png
+    - assets/images/levels_badge.png
   fonts:
     - family: PressStart
       fonts:
