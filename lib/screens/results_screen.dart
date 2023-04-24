@@ -21,7 +21,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Beer Pong Results", style: TextStyle(fontSize: 16)),
+        title: const Text("Spiel beendet", style: TextStyle(fontSize: 16)),
         backgroundColor: Colors.black12,
       ),
       body: Column(

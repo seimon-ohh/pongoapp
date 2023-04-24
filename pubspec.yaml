@@ -46,6 +46,7 @@ dependencies:
   flutter_svg: ^2.0.5
   flutter_expandable_fab: ^1.7.1
   get_it: ^7.2.0
+  confetti: ^0.7.0
   
 
 dev_dependencies:

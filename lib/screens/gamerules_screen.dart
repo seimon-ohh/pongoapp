@@ -31,7 +31,7 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Beer Pong Rules", style: TextStyle(fontSize: 16)),
+        title: const Text("Regeln bestimmen", style: TextStyle(fontSize: 16)),
         backgroundColor: Colors.black12,
       ),
       body: SingleChildScrollView(
@@ -43,7 +43,7 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
               children: [
                 const SizedBox(height: 40),
                 const Text(
-                  "Number of cups:",
+                  "Anzahl Becher:",
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.white,
@@ -100,7 +100,7 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10.0),
                       child: Text(
-                        "Allow rerack",
+                        "Nachwurf erlauben",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 12,

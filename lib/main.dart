@@ -14,9 +14,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'screens/gamemode_screen.dart';
 
-
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
@@ -37,7 +35,6 @@ class BeerPongApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       title: 'Pongo Startseite',
       theme: ThemeData(
         fontFamily: "PressStart",
@@ -51,11 +48,11 @@ class BeerPongApp extends StatelessWidget {
             ),
           ),
         ),
-      ),debugShowCheckedModeBanner: false,
+      ),
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Stack(
           children: [
-
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -81,21 +78,22 @@ class BeerPongApp extends StatelessWidget {
                         Navigator.of(innerContext)
                             .pushNamed(GamemodeScreen.routeName);
                       },
-                      child: Text('Start Game'),
+                      child: Text('Spiel starten'),
                     );
                   }),
                   SizedBox(height: 10),
-    Builder(builder: (BuildContext innerContext) {
-    return ElevatedButton(
-    onPressed: () {
-    Navigator.of(innerContext)
-        .pushNamed(PricingScreen.routeName);
-    },
-                    child: const Text(
-                      'Premium-Version kaufen',
-                      style: TextStyle(fontSize: 10),
-                    ),);
-    }),
+                  Builder(builder: (BuildContext innerContext) {
+                    return ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(innerContext)
+                            .pushNamed(PricingScreen.routeName);
+                      },
+                      child: const Text(
+                        'Premium-Version kaufen',
+                        style: TextStyle(fontSize: 10),
+                      ),
+                    );
+                  }),
                 ],
               ),
             ),
@@ -103,7 +101,7 @@ class BeerPongApp extends StatelessWidget {
               bottom: 20,
               left: 20,
               child: FloatingActionButton(
-                mini:true,
+                mini: true,
                 backgroundColor: Color.fromRGBO(188, 188, 188, 1),
                 onPressed: () {
                   // Hier die Aktion für das Fragezeichen-Icon einfügen
@@ -120,8 +118,8 @@ class BeerPongApp extends StatelessWidget {
         floatingActionButton: ExpandableFab(
           collapsedFabSize: ExpandableFabSize.small,
           distance: 50,
-          closeButtonStyle:
-              ExpandableFabCloseButtonStyle(backgroundColor: Colors.grey),
+          closeButtonStyle: ExpandableFabCloseButtonStyle(
+              backgroundColor: Colors.grey, foregroundColor: Colors.black),
           backgroundColor: Color.fromRGBO(188, 188, 188, 1),
           foregroundColor: Colors.black,
           child: Icon(Icons.language),
@@ -140,14 +138,24 @@ class BeerPongApp extends StatelessWidget {
             ),
             FloatingActionButton.small(
               heroTag: null,
-              child: Container(
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/uk_flag.png"),
-                      fit: BoxFit.cover,
-                    )),
-              ),
+              child: Stack(children: [
+                Container(
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: AssetImage("assets/images/uk_flag.png"),
+                        fit: BoxFit.cover,
+                      )),
+                ),
+                const Positioned(
+                  top: 13,
+                    left: 5,
+                    child: Text(
+                  "Soon",
+                  style: TextStyle(
+                      color: Colors.black, fontSize: 12, fontFamily: "Arial",fontWeight: FontWeight.bold),
+                ))
+              ]),
               onPressed: () {},
             ),
           ],
