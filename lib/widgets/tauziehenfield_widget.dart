@@ -58,11 +58,14 @@ class _CupGameWidgetState extends State<CupGameWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IconButton(
-                onPressed: _moveCupLeft,
-                icon: Icon(Icons.arrow_back),
-                color: Colors.blue,
-                iconSize: 40,
+              RotationTransition(
+                turns: AlwaysStoppedAnimation(selectedCupIndex > 0 ? -0.25 : 0),
+                child: IconButton(
+                  onPressed: _moveCupLeft,
+                  icon: Icon(Icons.arrow_back),
+                  color: Colors.red,
+                  iconSize: 60,
+                ),
               ),
               SizedBox(width: 16),
               Column(
@@ -71,11 +74,14 @@ class _CupGameWidgetState extends State<CupGameWidget> {
                 ],
               ),
               SizedBox(width: 16),
-              IconButton(
-                onPressed: _moveCupRight,
-                icon: Icon(Icons.arrow_forward),
-                color: Colors.red,
-                iconSize: 40,
+              RotationTransition(
+                turns: AlwaysStoppedAnimation(selectedCupIndex < 6 ? 0.75 : 0.5),
+                child: IconButton(
+                  onPressed: _moveCupRight,
+                  icon: Icon(Icons.arrow_forward),
+                  color: Colors.blue,
+                  iconSize: 60,
+                ),
               ),
             ],
           ),

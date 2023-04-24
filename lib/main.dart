@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:pongoapp/providers/gamedata_provider.dart';
 import 'package:pongoapp/screens/gameboard_screen.dart';
 import 'package:pongoapp/screens/gamerules_screen.dart';
+import 'package:pongoapp/screens/pricing_screen.dart';
 import 'package:pongoapp/screens/tauziehen_screen.dart';
 import 'package:pongoapp/screens/teamlist_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'helpers/locator.dart';
 import 'screens/gamemode_screen.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 
 void main() async {
   setupLocator();
@@ -90,21 +90,17 @@ class BeerPongApp extends StatelessWidget {
                     );
                   }),
                   SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () async {
-                      final Uri url =
-                          Uri.parse('https://play.google.com/store/games');
-                      if (await canLaunchUrl(url)) {
-                        await launchUrl(url);
-                      } else {
-                        throw "Could not launch $url";
-                      }
-                    },
+    Builder(builder: (BuildContext innerContext) {
+    return ElevatedButton(
+    onPressed: () {
+    Navigator.of(innerContext)
+        .pushNamed(PricingScreen.routeName);
+    },
                     child: const Text(
                       'Premium-Version kaufen',
-                      style: TextStyle(fontSize: 8),
-                    ),
-                  ),
+                      style: TextStyle(fontSize: 10),
+                    ),);
+    }),
                 ],
               ),
             ),
@@ -166,6 +162,7 @@ class BeerPongApp extends StatelessWidget {
         BeerPongRulesPage.routeName: (ctx) => BeerPongRulesPage(),
         GameboardScreen.routeName: (ctx) => GameboardScreen(),
         TauziehenScreen.routeName: (ctx) => TauziehenScreen(),
+        PricingScreen.routeName: (ctx) => PricingScreen(),
       },
     );
   }
