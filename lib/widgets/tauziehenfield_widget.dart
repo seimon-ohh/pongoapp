@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../screens/pricing_screen.dart';
+import '../screens/results_screen.dart';
+
 class CupGameWidget extends StatefulWidget {
   @override
   _CupGameWidgetState createState() => _CupGameWidgetState();
@@ -36,12 +39,14 @@ class _CupGameWidgetState extends State<CupGameWidget> {
           title: Text('Gewinner!'),
           content: Text('Das Spiel ist beendet.'),
           actions: [
-            TextButton(
+            Builder(builder: (BuildContext innerContext) { return TextButton(
               child: Text('OK'),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(innerContext)
+                    .pushNamed(ResultsScreen.routeName);
               },
-            ),
+            );
+            }),
           ],
         );
       },
@@ -70,7 +75,13 @@ class _CupGameWidgetState extends State<CupGameWidget> {
               SizedBox(width: 16),
               Column(
                 children: [
-                  for (int i = 0; i < 7; i++) _buildCup(i == selectedCupIndex),
+                  _buildCup(0, Colors.blue),
+                  _buildCup(1, Colors.lightBlue),
+                  _buildCup(2, Color.fromRGBO( 0, 0, 139, 1 )),
+                  _buildCup(3, Colors.purple),
+                  _buildCup(4, Color.fromRGBO( 139, 0, 0, 1 )),
+                  _buildCup(5, Colors.pink),
+                  _buildCup(6, Colors.red),
                 ],
               ),
               SizedBox(width: 16),
@@ -91,20 +102,21 @@ class _CupGameWidgetState extends State<CupGameWidget> {
     );
   }
 
-  Widget _buildCup(bool selected) {
+  Widget _buildCup(int index, Color color) {
+    bool selected = index == selectedCupIndex;
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: Container(
         width: 60,
         height: 60,
         decoration: BoxDecoration(
-          color: selected ? Colors.purple : Colors.grey[300],
+          color: selected ? color : Colors.grey[300],
           shape: BoxShape.circle,
         ),
         child: ElevatedButton(
           onPressed: () {
             setState(() {
-              selectedCupIndex = selectedCupIndex;
+              selectedCupIndex = index;
             });
           },
           child: Text(''),
