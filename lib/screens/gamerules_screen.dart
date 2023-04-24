@@ -29,12 +29,14 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
         Provider.of<GameDataProvider>(context, listen: false);
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Beer Pong Rules", style: TextStyle(fontSize: 16)),
-          backgroundColor: Colors.black12,
-        ),
-        body: SingleChildScrollView(
-          child: Column(
+      appBar: AppBar(
+        title: const Text("Beer Pong Rules", style: TextStyle(fontSize: 16)),
+        backgroundColor: Colors.black12,
+      ),
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -170,26 +172,44 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
                       padding: EdgeInsets.symmetric(horizontal: 8),
                       child: Text(
                         level,
-                        style: TextStyle(fontSize: 12, fontFamily: "Minecraft"),
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontFamily: "Minecraft",
+                          color: level == "Dirty" ? Colors.grey : null,
+                        ),
                       ),
                     );
                   }).toList(),
                   isSelected:
                       _levels.map((level) => level == _selectedLevel).toList(),
                   onPressed: (index) {
-                    setState(() {
-                      _selectedLevel = _levels[index];
-                    });
-                    gameDataProvider.updateLevel(_selectedLevel);
+                    if (_levels[index] != "Dirty") {
+                      setState(() {
+                        _selectedLevel = _levels[index];
+                      });
+                      gameDataProvider.updateLevel(_selectedLevel);
+                    }
                   },
                 ),
                 SizedBox(height: 140),
                 ElevatedButton(
-                    child: Text("Start game", style: TextStyle(fontSize: 14)),
-                    onPressed: () {
-                      Navigator.pushNamed(context, GameboardScreen.routeName);
-                    }),
-              ]),
-        ));
+                  child: Text("Start game", style: TextStyle(fontSize: 14)),
+                  onPressed: () {
+                    Navigator.pushNamed(context, GameboardScreen.routeName);
+                  },
+                ),
+              ],
+            ),
+            Positioned(
+              right: 95,
+              top: 330,
+              child: Image.asset(
+                "assets/images/diamond.png",
+                height: 30,
+              ),
+            ),],
+        ),
+      ),
+    );
   }
 }
