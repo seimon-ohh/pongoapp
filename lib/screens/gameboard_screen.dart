@@ -8,6 +8,8 @@ import '../providers/gamedata_provider.dart';
 import '../widgets/fortunebar.dart';
 import 'dart:math' as math;
 
+import '../widgets/timer_widget.dart';
+
 class GameboardScreen extends StatefulWidget {
   static const routeName = "/gameboard-screen";
 
@@ -18,8 +20,7 @@ class GameboardScreen extends StatefulWidget {
 class _GameboardScreenState extends State<GameboardScreen> {
   bool showButton = true;
   bool showFortuneBar = false;
-  int _elapsedSeconds = 0;
-  Timer? _timer;
+
 
   Future<bool> showExitConfirmationDialog() async {
     return await showDialog(
@@ -69,7 +70,7 @@ class _GameboardScreenState extends State<GameboardScreen> {
                 setState(() {
                   showButton = false;
                   showFortuneBar = false;
-                  startTimer();
+                  ;
                 });
               },
               child: Text('OK'),
@@ -80,22 +81,7 @@ class _GameboardScreenState extends State<GameboardScreen> {
     );
   }
 
-  void startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        _elapsedSeconds++;
-      });
-    });
-  }
 
-  void stopTimer() {
-    _timer?.cancel();
-  }
-
-  void dispose() {
-    super.dispose();
-    stopTimer();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,9 +113,10 @@ class _GameboardScreenState extends State<GameboardScreen> {
                 cups: gameDataProvider.gameData.numberOfCups,
               ),
               Row(
+
                 children: [
                   Expanded(
-                    flex: 1,
+                    flex: 2,
                     child: LayoutBuilder(
                       builder: (BuildContext context, BoxConstraints constraints) {
                         return SizedBox(
@@ -137,27 +124,19 @@ class _GameboardScreenState extends State<GameboardScreen> {
                           height: constraints.maxWidth,
                           child: Align(
                             alignment: Alignment.centerLeft, // Zentriert den gedrehten Text innerhalb der SizedBox
-                            child: Transform.rotate(
-                              angle: -math.pi / 2,
-                              child: Text(
-                                '${_elapsedSeconds ~/ 60}:${(_elapsedSeconds % 60).toString().padLeft(2, '0')}',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(fontSize: 24, color: Colors.white),
-                              ),
-                            ),
+                            child:!showButton &&!showFortuneBar? const GameTimer():null,
                           ),
                         );
                       },
                     ),
                   ),
                   Expanded(
-                    flex: 1,
+                    flex: 4,
                     child: Center(
                       child: showButton
                           ? ElevatedButton(
                         onPressed: onPress,
-                        child: Text('Start Game'),
+                        child: Text('Start',),
                       )
                           : showFortuneBar
                           ? FortuneBarWidget(
@@ -169,7 +148,7 @@ class _GameboardScreenState extends State<GameboardScreen> {
                           : const SizedBox.shrink(),
                     ),
                   ),
-                  Expanded(flex: 1, child: Container()),
+                  Expanded(flex: 2, child: Container()),
                 ],
               ),
 

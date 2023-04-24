@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:pongoapp/screens/pricing_screen.dart';
 import 'package:pongoapp/screens/teamlist_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -26,7 +27,7 @@ class GamemodeCarousel extends StatelessWidget {
       'image': 'assets/images/tictactoe.png',
       'title': 'Tic Tac Toe',
       'description':
-          'Es wird abwechselnd geworfen. Wer zuerst 3 Becher in einer Reihe getroffen hat, gewinnt.',
+          'Es wird abwechselnd geworfen. Wer zuerst 3 Becher in einer Reihe getroffen hat, gewinnt.\n\n',
       'isLocked': true,
     },
     {
@@ -106,14 +107,9 @@ class GamemodeCarousel extends StatelessWidget {
                     SizedBox(height: 16.0),
                     ElevatedButton(
                       onPressed: gamemodes[index]["isLocked"]
-                          ? () async {
-                              final Uri url = Uri.parse(
-                                  'https://play.google.com/store/games');
-                              if (await canLaunchUrl(url)) {
-                                await launchUrl(url);
-                              } else {
-                                throw "Could not launch $url";
-                              }
+                          ? () {
+                        Navigator.pushNamed(
+                            context, PricingScreen.routeName);
                             }
                           : () {
                               gameDataProvider
@@ -122,8 +118,8 @@ class GamemodeCarousel extends StatelessWidget {
                                   context, TeamListsWidget.routeName);
                             },
                       child: !gamemodes[index]["isLocked"]
-                          ? Text("Choose")
-                          : Text("Get Premium"),
+                          ? Text("Wählen")
+                          : Text("Get Premium", maxLines: 1,),
                       style: ElevatedButton.styleFrom(
                         foregroundColor: gamemodes[index]["isLocked"] ? Colors.black45 : Colors.black,
                         backgroundColor:

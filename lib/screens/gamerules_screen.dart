@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pongoapp/screens/gameboard_screen.dart';
+import 'package:pongoapp/screens/pricing_screen.dart';
 import 'package:pongoapp/screens/tauziehen_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -175,15 +176,16 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
                         style: TextStyle(
                           fontSize: 12,
                           fontFamily: "Minecraft",
-                          color: level == "Dirty" ? Colors.grey : null,
+                          color: (level == "Dirty" || level == "Extreme") ? Colors.grey : null,
                         ),
                       ),
                     );
                   }).toList(),
-                  isSelected:
-                      _levels.map((level) => level == _selectedLevel).toList(),
+                  isSelected: _levels.map((level) => level == _selectedLevel).toList(),
                   onPressed: (index) {
-                    if (_levels[index] != "Dirty") {
+                    if (_levels[index] == "Dirty" || _levels[index] == "Extreme") {
+                      Navigator.pushNamed(context, PricingScreen.routeName);
+                    } else {
                       setState(() {
                         _selectedLevel = _levels[index];
                       });
@@ -191,6 +193,7 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
                     }
                   },
                 ),
+
                 SizedBox(height: 140),
                 ElevatedButton(
                   child: Text("Start game", style: TextStyle(fontSize: 14)),
@@ -207,7 +210,15 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
                 "assets/images/diamond.png",
                 height: 30,
               ),
-            ),],
+            ),Positioned(
+              right: 143,
+              top: 330,
+              child: Image.asset(
+                "assets/images/diamond.png",
+                height: 30,
+              ),
+            ),
+          ],
         ),
       ),
     );

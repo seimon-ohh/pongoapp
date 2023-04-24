@@ -54,20 +54,7 @@ class BeerPongApp extends StatelessWidget {
       home: Scaffold(
         body: Stack(
           children: [
-            Positioned(
-              top: 20,
-              right: 10,
-              child: FloatingActionButton(
-                backgroundColor: Colors.white,
-                onPressed: () {
-                  // Hier die Aktion für das Profil-Icon einfügen
-                },
-                child: Icon(
-                  Icons.person_outline,
-                  color: Colors.black,
-                ),
-              ),
-            ),
+
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -15,7 +15,7 @@ class GamemodeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Gamemode"),
+        title: Text("Spielmodus"),
         backgroundColor: Colors.black12,
       ),
       body: Center(

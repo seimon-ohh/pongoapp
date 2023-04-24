@@ -156,16 +156,21 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.blue),
                     ),
-                    labelText: 'Team 1 Member',
+                    labelText: 'Teammitglied hinzufügen',
                     labelStyle: TextStyle(color: Colors.white, fontSize: 12),
                   ),
                 ),
                 trailing: ValueListenableBuilder<TextEditingValue>(
                   valueListenable: _team1Controller,
-                  builder: (BuildContext context, TextEditingValue value, Widget? child) {
+                  builder: (BuildContext context, TextEditingValue value,
+                      Widget? child) {
                     return IconButton(
-                      onPressed: value.text.isNotEmpty ? _addMemberToTeam1 : null,
-                      icon: Icon(Icons.add, color: value.text.isNotEmpty ? Colors.white : Colors.grey),
+                      onPressed:
+                          value.text.isNotEmpty ? _addMemberToTeam1 : null,
+                      icon: Icon(Icons.add,
+                          color: value.text.isNotEmpty
+                              ? Colors.white
+                              : Colors.grey),
                     );
                   },
                 ),
@@ -190,7 +195,6 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
                   side: BorderSide(color: Colors.white),
                 ),
                 title: TextField(
-
                   style: const TextStyle(
                       color: Colors.white,
                       fontSize: 14,
@@ -203,13 +207,12 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.red),
                     ),
-                    labelText: 'Team 2 Member',
+                    labelText: 'Teammitglied hinzufügen',
                     labelStyle: TextStyle(
                       color: Colors.white,
                       fontSize: 12,
                     ),
                   ),
-
                   onSubmitted: (_) {
                     _addMemberToTeam2();
                   },
@@ -217,10 +220,15 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
                 ),
                 trailing: ValueListenableBuilder<TextEditingValue>(
                   valueListenable: _team2Controller,
-                  builder: (BuildContext context, TextEditingValue value, Widget? child) {
+                  builder: (BuildContext context, TextEditingValue value,
+                      Widget? child) {
                     return IconButton(
-                      onPressed: value.text.isNotEmpty ? _addMemberToTeam2 : null,
-                      icon: Icon(Icons.add, color: value.text.isNotEmpty ? Colors.white : Colors.grey),
+                      onPressed:
+                          value.text.isNotEmpty ? _addMemberToTeam2 : null,
+                      icon: Icon(Icons.add,
+                          color: value.text.isNotEmpty
+                              ? Colors.white
+                              : Colors.grey),
                     );
                   },
                 ),
@@ -231,6 +239,9 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.zero,
+        ),
         onPressed: _team1Members.isNotEmpty && _team2Members.isNotEmpty
             ? () {
                 gameDataProvider.updateTeamList1(_team1Members);
@@ -243,14 +254,10 @@ class _TeamListsWidgetState extends State<TeamListsWidget> {
               }
             : () => _showSnackbar(context),
         label: const Text(
-          'Next',
+          'Weiter',
           style: TextStyle(color: Colors.black),
         ),
-        icon: const Icon(
-          Icons.arrow_forward,
-          color: Colors.black,
-        ),
-        backgroundColor: const Color.fromRGBO(188, 188, 188, 1),
+        backgroundColor:  Colors.white,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );

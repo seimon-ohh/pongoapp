@@ -14,7 +14,8 @@ class _PricingScreenState extends State<PricingScreen> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('PricingScreen'),
+          title: const Text("Pongo Premium 💎", style: TextStyle(fontSize: 16)),
+          backgroundColor: Colors.black12,
           bottom: TabBar(
             tabs: [
               Tab(text: 'Tab 1'),
