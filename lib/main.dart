@@ -29,6 +29,7 @@ class BeerPongApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
       title: 'Pongo Startseite',
       theme: ThemeData(
         fontFamily: "PressStart",
@@ -42,7 +43,7 @@ class BeerPongApp extends StatelessWidget {
             ),
           ),
         ),
-      ),
+      ),debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Stack(
           children: [

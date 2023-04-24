@@ -70,40 +70,40 @@ class GamemodeCarousel extends StatelessWidget {
         CarouselSlider.builder(
           itemCount: gamemodes.length,
           itemBuilder: (BuildContext context, int index, int pageViewIndex) {
-            return Container(
-              margin: EdgeInsets.all(8.0),
-              padding: EdgeInsets.all(10.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-                color: Color.fromARGB(255, 42, 42, 42),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    gamemodes[index]['image'],
-                    height: 150,
-                  ),
-                  Text(
-                    gamemodes[index]['title'],
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+            return Stack(children: [
+              Container(
+                margin: EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  color: Color.fromARGB(255, 42, 42, 42),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      gamemodes[index]['image'],
+                      height: 150,
                     ),
-                  ),
-                  SizedBox(height: 16.0),
-                  Text(
-                    gamemodes[index]['description'],
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: "Minecraft",
-                      fontSize: 14.0,
-                      color: Colors.white,
+                    Text(
+                      gamemodes[index]['title'],
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 16.0),
-                  Stack(children: [
+                    SizedBox(height: 16.0),
+                    Text(
+                      gamemodes[index]['description'],
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: "Minecraft",
+                        fontSize: 14.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: 16.0),
                     ElevatedButton(
                       onPressed: gamemodes[index]["isLocked"]
                           ? () async {
@@ -116,8 +116,8 @@ class GamemodeCarousel extends StatelessWidget {
                               }
                             }
                           : () {
-                              gameDataProvider.updateGamemode(
-                                  gamemodes[index]['title']);
+                              gameDataProvider
+                                  .updateGamemode(gamemodes[index]['title']);
                               Navigator.pushNamed(
                                   context, TeamListsWidget.routeName);
                             },
@@ -125,25 +125,24 @@ class GamemodeCarousel extends StatelessWidget {
                           ? Text("Choose")
                           : Text("Get Premium"),
                       style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.black,
-                        backgroundColor: gamemodes[index]["isLocked"]
-                            ? Colors.grey
-                            : null,
+                        foregroundColor: gamemodes[index]["isLocked"] ? Colors.black45 : Colors.black,
+                        backgroundColor:
+                            gamemodes[index]["isLocked"] ? Colors.grey : null,
                       ),
-                    ),
-                    if (gamemodes[index]["isLocked"])
-                      Positioned(
-                        right: -22,
-                        top:-5,
-                        child: Image.asset(
-                          "assets/images/diamond.png",
-                          height: 40,
-                        ),
-                      ),
-                  ])
-                ],
+                    )
+                  ],
+                ),
               ),
-            );
+              if (gamemodes[index]["isLocked"])
+                Positioned(
+                  top:335,
+                  left: 220,
+                  child: Image.asset(
+                    "assets/images/diamond.png",
+                    height: 40,
+                  ),
+                ),
+            ]);
           },
           options: CarouselOptions(
             height: 450,
