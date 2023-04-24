@@ -11,11 +11,13 @@ class BeerPongField extends StatefulWidget {
   int _elapsedSeconds = 0;
   bool showButton;
   bool showFortuneBar;
+  final Color cupColor;
 
   BeerPongField(
       {required this.cups,
       required this.showButton,
-      required this.showFortuneBar});
+      required this.showFortuneBar,
+      this.cupColor = Colors.red});
 
   @override
   _BeerPongFieldState createState() => _BeerPongFieldState();
@@ -96,26 +98,64 @@ class _BeerPongFieldState extends State<BeerPongField> {
   }
 
   void _onButtonPress(
-      ValueNotifier<Color> colorNotifier, GameDataProvider gameDataProvider) {
-    if (!widget.showButton && !widget.showFortuneBar) {
-      String challengeType = gameDataProvider.gameData.challenges;
+    ValueNotifier<Color> colorNotifier,
+    GameDataProvider gameDataProvider,
 
-      int randomIndexQuiz = random.nextInt(data[0]["quiz"].length);
-      int randomIndexTruthOrDare =
-          random.nextInt(data[0]["truthordare"].length);
-      int randomIndexGetActive = random.nextInt(data[0]["getactive"].length);
+  ) {
+    if (colorNotifier.value != Colors.white10) {
+      if (!widget.showButton && !widget.showFortuneBar) {
+        String challengeType = gameDataProvider.gameData.challenges;
 
-      Widget content;
+        int randomIndexQuiz = random.nextInt(data[0]["quiz"].length);
+        int randomIndexTruthOrDare =
+            random.nextInt(data[0]["truthordare"].length);
+        int randomIndexGetActive = random.nextInt(data[0]["getactive"].length);
 
-      if (challengeType == "Quiz") {
-        bool showAnswer = false;
-        List<String> questionAndAnswer = getQuestionAndAnswer(randomIndexQuiz);
-        content = StatefulBuilder(builder: (context, setState) {
-          return Column(
+        Widget content;
+
+        if (challengeType == "Quiz") {
+          bool showAnswer = false;
+          List<String> questionAndAnswer =
+              getQuestionAndAnswer(randomIndexQuiz);
+          content = StatefulBuilder(builder: (context, setState) {
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Frage:\n\n${questionAndAnswer[0]}",
+                  style: TextStyle(
+                    fontFamily: "Minecraft",
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                showAnswer
+                    ? Text(
+                        "Antwort:\n ${questionAndAnswer[1]}",
+                        style: TextStyle(
+                          fontFamily: "Minecraft",
+                        ),
+                      )
+                    : TextButton(
+                        onPressed: () {
+                          setState(() {
+                            showAnswer = true;
+                          });
+                        },
+                        child: Text("Antwort zeigen"),
+                      ),
+              ],
+            );
+          });
+        } else if (challengeType == "Truth or Dare") {
+          List<String> truthAndDare = getTruthOrDare(randomIndexTruthOrDare);
+          content = Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "Frage:\n\n${questionAndAnswer[0]}",
+                "Wahrheit:\n${truthAndDare[0]}",
                 style: TextStyle(
                   fontFamily: "Minecraft",
                 ),
@@ -123,90 +163,64 @@ class _BeerPongFieldState extends State<BeerPongField> {
               SizedBox(
                 height: 20,
               ),
-              showAnswer
-                  ? Text(
-                      "Antwort:\n ${questionAndAnswer[1]}",
-                      style: TextStyle(
-                        fontFamily: "Minecraft",
-                      ),
-                    )
-                  : TextButton(
-                      onPressed: () {
-                        setState(() {
-                          showAnswer = true;
-                        });
-                      },
-                      child: Text("Antwort zeigen"),
-                    ),
+              Text(
+                "Pflicht:\n${truthAndDare[1]}",
+                style: TextStyle(
+                  fontFamily: "Minecraft",
+                ),
+              ),
             ],
           );
-        });
-      } else if (challengeType == "Truth or Dare") {
-        List<String> truthAndDare = getTruthOrDare(randomIndexTruthOrDare);
-        content = Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              "Wahrheit:\n${truthAndDare[0]}",
+        } else if (challengeType == "Get active") {
+          String getActive = getGetActive(randomIndexGetActive);
+          content = Text(getActive,
               style: TextStyle(
                 fontFamily: "Minecraft",
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              "Pflicht:\n${truthAndDare[1]}",
-              style: TextStyle(
-                fontFamily: "Minecraft",
-              ),
-            ),
-          ],
-        );
-      } else if (challengeType == "Get active") {
-        String getActive = getGetActive(randomIndexGetActive);
-        content = Text(getActive,
-            style: TextStyle(
-              fontFamily: "Minecraft",
-            ));
-      } else {
-        content = Text("Invalid challenge type");
-      }
+              ));
+        } else {
+          content = Text("Invalid challenge type");
+        }
 
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(challengeType),
-            content: SizedBox(child: content),
-            actions: <Widget>[
-              TextButton(
-                child: Text('Weiter'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-      colorNotifier.value = Colors.white10;
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(challengeType),
+              content: SizedBox(child: content),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('Weiter'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+        colorNotifier.value = Colors.white10;
+      }
+    } else {
+      colorNotifier.value = widget.cupColor;
     }
   }
 
   Widget _buildCup(GameDataProvider gameDataProvider) {
-    ValueNotifier<Color> colorNotifier = ValueNotifier<Color>(Colors.red);
+    ValueNotifier<Color> colorNotifier = ValueNotifier<Color>(widget.cupColor);
+
     return Padding(
       padding: EdgeInsets.all(8.0),
       child: ValueListenableBuilder<Color>(
         valueListenable: colorNotifier,
         builder: (context, color, _) {
           return ElevatedButton(
-            onPressed: () => _onButtonPress(colorNotifier, gameDataProvider),
+            onPressed: () => _onButtonPress(
+              colorNotifier,
+              gameDataProvider,
+            ),
             child: Text(''),
             style: ElevatedButton.styleFrom(
-              primary: color,
+              backgroundColor: color,
               shape: CircleBorder(),
               padding: EdgeInsets.all(16.0),
             ),

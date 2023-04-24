@@ -204,14 +204,14 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
               ],
             ),
             Positioned(
-              right: 95,
+              right: 105,
               top: 330,
               child: Image.asset(
                 "assets/images/diamond.png",
                 height: 30,
               ),
             ),Positioned(
-              right: 143,
+              right: 153,
               top: 330,
               child: Image.asset(
                 "assets/images/diamond.png",

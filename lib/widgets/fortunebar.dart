@@ -50,7 +50,7 @@ class _FortuneBarWidgetState extends State<FortuneBarWidget> {
     return FortuneBar(
       indicators: const <FortuneIndicator>[
         FortuneIndicator(
-          alignment: Alignment.bottomCenter,
+          alignment: Alignment.topCenter,
           child: CustomTriangleIndicator(height: 10, width: 60, notRotate: true),
         ),
       ],

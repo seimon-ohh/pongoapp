@@ -102,6 +102,7 @@ class _GameboardScreenState extends State<GameboardScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              SizedBox(height: 10,),
               Transform.rotate(
                 angle: 3.14159265359,
                 child: Text(
@@ -113,6 +114,7 @@ class _GameboardScreenState extends State<GameboardScreen> {
                 cups: gameDataProvider.gameData.numberOfCups,
                 showFortuneBar: showFortuneBar,
                 showButton: showButton,
+                cupColor: Colors.blue,
               ),
               SizedBox(
                 height: 120,
