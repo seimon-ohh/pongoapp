@@ -12,7 +12,6 @@ import 'package:pongoapp/screens/tauziehen_screen.dart';
 import 'package:pongoapp/screens/teamlist_screen.dart';
 
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import 'screens/gamemode_screen.dart';
 
@@ -40,6 +39,8 @@ class BeerPongApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return MaterialApp(
       title: 'Pongo Startseite',
       theme: ThemeData(
@@ -169,6 +170,7 @@ class BeerPongApp extends StatelessWidget {
           ],
         ),
       ),
+
       routes: {
         GamemodeScreen.routeName: (ctx) => GamemodeScreen(),
         TeamListsWidget.routeName: (ctx) => TeamListsWidget(),
@@ -176,8 +178,8 @@ class BeerPongApp extends StatelessWidget {
         GameboardScreen.routeName: (ctx) => GameboardScreen(),
         TauziehenScreen.routeName: (ctx) => TauziehenScreen(),
         PricingScreen.routeName: (ctx) => PricingScreen(),
-        ResultsScreen.routeName: (ctx) => ResultsScreen(),
-      },
+        ResultsScreen.routeName: (ctx) => ResultsScreen(winnerTeamName: '', gamemode: '',),
+      }
     );
   }
 }

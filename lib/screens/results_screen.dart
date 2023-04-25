@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:pongoapp/screens/gamemode_screen.dart';
 import 'package:pongoapp/widgets/fortunewheel_widget.dart';
@@ -14,36 +16,99 @@ class ResultsScreen extends StatefulWidget {
 }
 
 class _ResultsScreenState extends State<ResultsScreen> {
-  String _winner = '';
-  String _gameTime = '';
-  String _result = '';
+  bool showButton = true;
+  bool showFortuneWheel = false;
 
-  void _spinWheel() {
-    // Logik zum Drehen des FortuneWheelWidgets
+  void showPunishmentPopup(String punish) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('$punish !'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                setState(() {
+                  showButton = false;
+                  showFortuneWheel = false;
+                  ;
+                });
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+
+
+
+
+    void onPress() {
+      setState(() {
+        showButton = false;
+        showFortuneWheel = true;
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Spiel beendet", style: TextStyle(fontSize: 16)),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context)
+              .pushReplacementNamed(GamemodeScreen.routeName),
+        ),
+        title: const Text(
+          "Spiel beendet",
+          style: TextStyle(fontSize: 16),
+        ),
         backgroundColor: Colors.black12,
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text('Winner: $_winner'),
-          Text('Game Time: $_gameTime'),
-          Text('Result: $_result'),
-          ElevatedButton(
-            onPressed: _spinWheel, // Verwenden Sie die _spinWheel-Methode statt FortuneWheelWidget()
-            child: const Text('Spin the wheel'),
+          SizedBox(height: 20),
+          Text(
+            "Der Gewinner ist ${widget.winnerTeamName}",
+            style: TextStyle(color: Colors.white),
           ),
-          const SizedBox(height: 20),
-          FortuneWheelWidget(),
+          if (widget.gamemode != "Tauziehen") ...[
+            SizedBox(height: 10),
+            Text(
+              "Spieldauer  min",
+              style: TextStyle(color: Colors.white),
+            ),
+            SizedBox(height: 10),
+            Text(
+              "Ergebnis ",
+              style: TextStyle(color: Colors.white),
+            ),
+          ],
+          SizedBox(height: 30),
+          ElevatedButton(
+            onPressed: onPress,
+            child: Text("Bestrafungszeit!"),
+          ),
+          SizedBox(height: 20),
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              color: Colors.black,
+              child: showFortuneWheel
+                  ? FortuneWheelWidget(selected: (punish) {
+                      showPunishmentPopup(punish);
+                    })
+                  : null,
+            ),
+          ),
         ],
       ),
     );
   }
 }
-

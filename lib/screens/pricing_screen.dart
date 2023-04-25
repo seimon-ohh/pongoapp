@@ -61,7 +61,7 @@ class _PricingScreenState extends State<PricingScreen> {
                 Card(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
                   child: ListTile(
-                    leading: Container(child: Image.asset('assets/images/Pongo_blk.png', height: 100),width: 50),
+                    leading: Container(child: Stack(children: [Image.asset('assets/images/Pongo_blk.png', height: 100),Image.asset('assets/images/games_badge.png', height: 100),]),width: 50),
                     title: Text('Alle Spiele',maxLines: 1),
                     subtitle: Text('Schalte alle Spiele frei.', style: TextStyle(fontSize: 12, fontFamily: "Minecraft")),
                     trailing: SizedBox(
@@ -278,7 +278,7 @@ class _PricingScreenState extends State<PricingScreen> {
                   Card(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
                     child: ListTile(
-                      leading: Container(child: Image.asset('assets/images/dart.png', height: 100),width: 50),
+                      leading: Container(child: Stack(children: [Image.asset('assets/images/Pongo_blk.png', height: 100),Image.asset('assets/images/extreme_badge.png', height: 100),]),width: 50),
                       title: Text('Extreme'),
                       subtitle: Text('Schalte das Level Extreme frei.', style: TextStyle(fontSize: 12, fontFamily: "Minecraft")),
                       trailing: SizedBox(
@@ -308,7 +308,7 @@ class _PricingScreenState extends State<PricingScreen> {
                   Card(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero,),
                     child: ListTile(
-                      leading: Container(child: Image.asset('assets/images/dart.png', height: 100),width: 50),
+                      leading: Container(child: Stack(children: [Image.asset('assets/images/Pongo_blk.png', height: 100),Image.asset('assets/images/dirty_badge.png', height: 100),]),width: 50),
                       title: Text('Dirty'),
                       subtitle: Text('Schalte das Level Dirty frei.', style: TextStyle(fontSize: 12, fontFamily: "Minecraft")),
                       trailing: SizedBox(

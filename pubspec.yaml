@@ -89,6 +89,11 @@ flutter:
     - assets/images/diamond.png
     - assets/images/Pongo_blk.png
     - assets/images/levels_badge.png
+    - assets/images/dirty_badge.png
+    - assets/images/games_badge.png
+    - assets/images/extreme_badge.png
+    - assets/videos/Cool Chiptune 8 Bit Background Music for Videos  No Copyright.mp4
+    - assets/audio/Cool Chiptune 8 Bit Background Music for Videos  No Copyright.mp3
   fonts:
     - family: PressStart
       fonts:

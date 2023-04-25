@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/gamedata_provider.dart';
 import '../screens/pricing_screen.dart';
 import '../screens/results_screen.dart';
 
@@ -116,7 +118,7 @@ class _CupGameWidgetState extends State<CupGameWidget> {
                 turns:
                     AlwaysStoppedAnimation(selectedCupIndex < 6 ? 0.75 : -0.25),
                 child: IconButton(
-                  onPressed: _moveCupRight,
+                  onPressed: () => _moveCupRight(gameDataProvider),
                   icon: Icon(Icons.arrow_forward),
                   color: Colors.red,
                   iconSize: 60,

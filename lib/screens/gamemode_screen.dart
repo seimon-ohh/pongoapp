@@ -15,6 +15,11 @@ class GamemodeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context)
+              .pushReplacementNamed("/"),
+        ),
         title: Text("Spielmodus"),
         backgroundColor: Colors.black12,
       ),

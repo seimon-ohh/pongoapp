@@ -119,7 +119,7 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
                 ),
                 SizedBox(height: 20),
                 Text(
-                  "Select a challenge:",
+                  "Wähle eine Challange:",
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
@@ -154,7 +154,7 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
                 ),
                 SizedBox(height: 20),
                 Text(
-                  "Select a level:",
+                  "Wähle ein Level:",
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
@@ -196,7 +196,7 @@ class _BeerPongRulesPageState extends State<BeerPongRulesPage> {
 
                 SizedBox(height: 140),
                 ElevatedButton(
-                  child: Text("Start game", style: TextStyle(fontSize: 14)),
+                  child: Text("Spiel starten", style: TextStyle(fontSize: 14)),
                   onPressed: () {
                     Navigator.pushNamed(context, GameboardScreen.routeName);
                   },
