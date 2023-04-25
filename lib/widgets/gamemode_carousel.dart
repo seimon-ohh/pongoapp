@@ -20,7 +20,7 @@ class GamemodeCarousel extends StatelessWidget {
       'image': 'assets/images/tauziehen.png',
       'title': 'Tauziehen',
       'description':
-          'Triffst du den angezeigten Bescher, wird dieser in deiene Richtung verschoben. Es gewinnt derjenige, der es schafft den Becher komplett auf seine eigene Seite wandern zu lassen.',
+          'Triffst du den angezeigten Becher, wird dieser in deine Richtung verschoben. Es gewinnt derjenige, der es schafft den Becher komplett auf seine eigene Seite wandern zu lassen.',
       'isLocked': false,
     },
     {

@@ -8,19 +8,22 @@ class AudioPlayer extends StatefulWidget {
 
 class _AudioPlayerState extends State<AudioPlayer> {
   final AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer();
-
+  bool _isMuted = false;
   @override
   void initState() {
-    super.initState();
     _playSong();
+    super.initState();
   }
+
 
   void _playSong() {
     _assetsAudioPlayer.open(
       Audio("assets/audio/Cool Chiptune 8 Bit Background Music for Videos  No Copyright.mp3"),
+      loopMode: LoopMode.single
     );
 
     _assetsAudioPlayer.play();
+
   }
 
   @override
@@ -29,8 +32,15 @@ class _AudioPlayerState extends State<AudioPlayer> {
     super.dispose();
   }
 
+  void _toggleMute() {
+    setState(() {
+      _isMuted = !_isMuted;
+      _assetsAudioPlayer.setVolume(_isMuted ? 0 : 1);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Text('Playing song from assets');
+    return Text("");
   }
 }

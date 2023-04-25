@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:pongoapp/screens/gamemode_screen.dart';
 import 'package:pongoapp/widgets/fortunewheel_widget.dart';
 
 class ResultsScreen extends StatefulWidget {
   static const routeName = "/results-screen";
+  final String winnerTeamName;
+  final String gamemode;
+
+  ResultsScreen({required this.winnerTeamName, required this.gamemode});
 
   @override
   State<ResultsScreen> createState() => _ResultsScreenState();

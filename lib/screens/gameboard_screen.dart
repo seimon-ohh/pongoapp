@@ -21,10 +21,12 @@ class GameboardScreen extends StatefulWidget {
 }
 
 class _GameboardScreenState extends State<GameboardScreen> {
+
   bool showButton = true;
   bool showFortuneBar = false;
   late ConfettiController _confettiController;
   GlobalKey _confettiKey = GlobalKey();
+
 
   // Deklaration der ValueNotifier mit 'late'
   late ValueNotifier<int> remainingCupsTeam1;
@@ -64,18 +66,31 @@ class _GameboardScreenState extends State<GameboardScreen> {
     super.dispose();
   }
 
-  void showWinnerDialog(String winnerTeam) {
+  void showWinnerDialog(
+      String winnerTeam, GameDataProvider gameDataProvider) {
+    String winnerTeamName = winnerTeam;
+    String gamemode = gameDataProvider.gameData.gamemode;
+
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Spiel beendet!'),
-          content: Container(height:150,child: Text('$winnerTeam hat gewonnen!')),
+          content: Container(height: 150, child: Text('$winnerTeam hat gewonnen!')),
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context)
-                    .pushReplacementNamed(ResultsScreen.routeName);
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => ResultsScreen(
+                      winnerTeamName: winnerTeamName,
+                      gamemode: gamemode,
+                    ),
+                  ),
+                      (Route<dynamic> route) => false,
+                );
               },
               child: Text('OK'),
             ),
@@ -84,6 +99,10 @@ class _GameboardScreenState extends State<GameboardScreen> {
       },
     );
   }
+
+
+
+
 
   Future<bool> showExitConfirmationDialog() async {
     return await showDialog(
@@ -204,7 +223,9 @@ class _GameboardScreenState extends State<GameboardScreen> {
                                   alignment: Alignment.centerLeft,
                                   // Zentriert den gedrehten Text innerhalb der SizedBox
                                   child: !showButton && !showFortuneBar
-                                      ? const GameTimer()
+                                      ? GameTimer(
+
+                                  )
                                       : null,
                                 ),
                               );
@@ -275,7 +296,7 @@ class _GameboardScreenState extends State<GameboardScreen> {
               builder: (context, value, child) {
                 if (value == 0) {
                   WidgetsBinding.instance!.addPostFrameCallback((_) {
-                    showWinnerDialog("Team 1");
+                    showWinnerDialog("Team 2", gameDataProvider);
                   });
                 }
                 return Container(); // Rückgabe eines leeren Containers, um keine visuellen Auswirkungen zu haben
@@ -287,7 +308,7 @@ class _GameboardScreenState extends State<GameboardScreen> {
                 if (value == 0) {
                   WidgetsBinding.instance!.addPostFrameCallback((_) {
                     _confettiController.play();
-                    showWinnerDialog("Team 2");
+                    showWinnerDialog("Team 1", gameDataProvider);
                   });
                 }
                 return Container(); // Rückgabe eines leeren Containers, um keine visuellen Auswirkungen zu haben

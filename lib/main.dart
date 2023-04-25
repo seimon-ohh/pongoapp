@@ -60,7 +60,7 @@ class BeerPongApp extends StatelessWidget {
 
         body: Stack(
           children: [
-            AudioPlayer(),
+            //AudioPlayer(),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -112,7 +112,7 @@ class BeerPongApp extends StatelessWidget {
                 mini: true,
                 backgroundColor: Color.fromRGBO(188, 188, 188, 1),
                 onPressed: () {
-                  // Hier die Aktion für das Fragezeichen-Icon einfügen
+
                 },
                 child: Icon(
                   Icons.help_outline,
