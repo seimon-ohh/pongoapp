@@ -1,16 +1,33 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.pongoapp-mergeDebugResources-13:/values-en-rXC/values-en-rXC.xml",
+            "outputFile": "com.example.pongoapp-mergeDebugResources-25:/values-en-rXC/values-en-rXC.xml",
             "map": [
                 {
-                    "source": "/Users/simon/.gradle/caches/transforms-3/1141b72fb8be4e566e7814849b1aa3a2/transformed/core-1.6.0/res/values-en-rXC/values-en-rXC.xml",
+                    "source": "/Users/simon/.gradle/caches/transforms-3/9008b2a9fb01102d26fd2f78c055a96b/transformed/core-1.9.0/res/values-en-rXC/values-en-rXC.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
                         "startOffsets": "55",
                         "endColumns": "203",
                         "endOffsets": "254"
+                    },
+                    "to": {
+                        "startLines": "7",
+                        "startColumns": "4",
+                        "startOffsets": "1110",
+                        "endColumns": "203",
+                        "endOffsets": "1309"
+                    }
+                },
+                {
+                    "source": "/Users/simon/.gradle/caches/transforms-3/426e295804754638b07eff7c556201f2/transformed/jetified-media2-session-1.2.0/res/values-en-rXC/values-en-rXC.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,262,461,655,879",
+                        "endColumns": "206,198,193,223,230",
+                        "endOffsets": "257,456,650,874,1105"
                     }
                 }
             ]

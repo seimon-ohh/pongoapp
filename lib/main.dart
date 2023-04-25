@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
+import 'package:pongoapp/helpers/audio_player.dart';
 import 'package:pongoapp/providers/gamedata_provider.dart';
 import 'package:pongoapp/screens/gameboard_screen.dart';
 import 'package:pongoapp/screens/gamerules_screen.dart';
@@ -9,6 +10,7 @@ import 'package:pongoapp/screens/pricing_screen.dart';
 import 'package:pongoapp/screens/results_screen.dart';
 import 'package:pongoapp/screens/tauziehen_screen.dart';
 import 'package:pongoapp/screens/teamlist_screen.dart';
+
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -31,7 +33,11 @@ void main() async {
   });
 }
 
+
+
 class BeerPongApp extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -51,8 +57,10 @@ class BeerPongApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+
         body: Stack(
           children: [
+            AudioPlayer(),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -173,3 +181,4 @@ class BeerPongApp extends StatelessWidget {
     );
   }
 }
+
