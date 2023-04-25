@@ -56,7 +56,7 @@ class _FortuneBarWidgetState extends State<FortuneBarWidget> {
       ],
       selected: controller.stream,
       items: fortuneItems,
-      styleStrategy: const UniformStyleStrategy(
+      styleStrategy:  UniformStyleStrategy(
         color: Colors.black,
         borderColor: Colors.white,
         borderWidth: 2.0,

@@ -165,6 +165,25 @@ class _GameboardScreenState extends State<GameboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    Path drawPingPongBall(Size size) {
+      final center = Offset(size.width / 2, size.height / 2);
+      final radius = size.width / 2;
+      final path = Path();
+
+      // Draw the main circle
+      path.addOval(Rect.fromCircle(center: center, radius: radius));
+
+      // Draw the shadow for a 3D effect
+      final shadowRadius = radius * 0.8;
+      final shadowOffset = Offset(radius * 0.2, radius * 0.2);
+      final shadowRect = Rect.fromCircle(
+          center: center + shadowOffset, radius: shadowRadius);
+      path.addOval(shadowRect);
+
+      return path;
+    }
+
     final gameDataProvider =
         Provider.of<GameDataProvider>(context, listen: true);
 
@@ -278,17 +297,23 @@ class _GameboardScreenState extends State<GameboardScreen> {
                 ],
               ),
             ),
-            Positioned.fill(
+            Positioned(
+              top: (MediaQuery.of(context).size.height / 2) - 50, // 50 ist die Hälfte der Widget-Höhe
+              left: (MediaQuery.of(context).size.width / 2) - 50,
               key: _confettiKey,
-              child: ConfettiWidget(
-                confettiController: _confettiController,
-                blastDirection: pi,
-                // radial value - LEFT
-                maxBlastForce: 10,
-                minBlastForce: 2,
-                emissionFrequency: 0.05,
-                numberOfParticles: 50,
-                gravity: 0.1,
+              child: Container(
+                height: 120,
+                width: 100,
+                child: ConfettiWidget(
+                  confettiController: _confettiController,
+                  blastDirectionality: BlastDirectionality.explosive,
+                  colors: [Colors.red, Colors.blue],
+                  maxBlastForce: 10,
+                  minBlastForce: 2,
+                  emissionFrequency: 0.02,
+                  numberOfParticles: 20,
+                  createParticlePath: drawPingPongBall ,
+                ),
               ),
             ),
             ValueListenableBuilder<int>(

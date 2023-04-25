@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:pongoapp/screens/loading_screen.dart';
 import 'package:pongoapp/screens/pricing_screen.dart';
 import 'package:pongoapp/screens/teamlist_screen.dart';
 import 'package:provider/provider.dart';
@@ -115,7 +116,7 @@ class GamemodeCarousel extends StatelessWidget {
                               gameDataProvider
                                   .updateGamemode(gamemodes[index]['title']);
                               Navigator.pushNamed(
-                                  context, TeamListsWidget.routeName);
+                                  context, LoadingOverlay.routeName);
                             },
                       child: !gamemodes[index]["isLocked"]
                           ? Text("Wählen")

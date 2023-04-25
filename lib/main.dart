@@ -6,6 +6,7 @@ import 'package:pongoapp/helpers/audio_player.dart';
 import 'package:pongoapp/providers/gamedata_provider.dart';
 import 'package:pongoapp/screens/gameboard_screen.dart';
 import 'package:pongoapp/screens/gamerules_screen.dart';
+import 'package:pongoapp/screens/loading_screen.dart';
 import 'package:pongoapp/screens/pricing_screen.dart';
 import 'package:pongoapp/screens/results_screen.dart';
 import 'package:pongoapp/screens/tauziehen_screen.dart';
@@ -170,7 +171,7 @@ class BeerPongApp extends StatelessWidget {
           ],
         ),
       ),
-
+      initialRoute: "/",
       routes: {
         GamemodeScreen.routeName: (ctx) => GamemodeScreen(),
         TeamListsWidget.routeName: (ctx) => TeamListsWidget(),
@@ -179,6 +180,7 @@ class BeerPongApp extends StatelessWidget {
         TauziehenScreen.routeName: (ctx) => TauziehenScreen(),
         PricingScreen.routeName: (ctx) => PricingScreen(),
         ResultsScreen.routeName: (ctx) => ResultsScreen(winnerTeamName: '', gamemode: '',),
+        LoadingOverlay.routeName: (ctx)=> LoadingOverlay(),
       }
     );
   }

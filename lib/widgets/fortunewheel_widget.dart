@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
-import '../helpers/custom_indicator.dart';
 
 class FortuneWheelWidget extends StatefulWidget {
   final ValueChanged<String> selected;
@@ -13,7 +12,14 @@ class FortuneWheelWidget extends StatefulWidget {
 }
 
 class _FortuneWheelWidgetState extends State<FortuneWheelWidget> {
-  StreamController<int> controller = StreamController<int>();
+  late StreamController<int> controller;
+  final random = Random();
+
+  @override
+  void initState() {
+    super.initState();
+    controller = StreamController<int>.broadcast();
+  }
 
   @override
   void dispose() {
@@ -23,41 +29,113 @@ class _FortuneWheelWidgetState extends State<FortuneWheelWidget> {
 
   @override
   Widget build(BuildContext context) {
+
     List<FortuneItem> fortuneItems = [
       FortuneItem(
-          child: Text('Arschbohrer',
-              style: TextStyle(fontFamily: "MineCraft", color: Colors.white))),
+        child: Text('Nasenbohrer-Parade',
+            style: TextStyle(
+                fontFamily: "MineCraft",
+                color: Colors.black,
+                fontWeight: FontWeight.bold)),
+      ),
       FortuneItem(
-          child: Text('5x Shot',
-              style: TextStyle(fontFamily: "MineCraft", color: Colors.white))),
+        child: Text('Team-Hüpfburg',
+            style: TextStyle(
+                fontFamily: "MineCraft",
+                color: Colors.black,
+                fontWeight: FontWeight.bold)),
+      ),
       FortuneItem(
-          child: Text('Karotte in Po',
-              style: TextStyle(fontFamily: "MineCraft", color: Colors.white))),
+        child: Text('Küss den Boden',
+            style: TextStyle(
+                fontFamily: "MineCraft",
+                color: Colors.black,
+                fontWeight: FontWeight.bold)),
+      ),
+      FortuneItem(
+        child: Text('Gesicht voller Sahne',
+            style: TextStyle(
+                fontFamily: "MineCraft",
+                color: Colors.black,
+                fontWeight: FontWeight.bold)),
+      ),
+      FortuneItem(
+        child: Text('Wasserschlacht',
+            style: TextStyle(
+                fontFamily: "MineCraft",
+                color: Colors.black,
+                fontWeight: FontWeight.bold)),
+      ),
+      FortuneItem(
+        child: Text('Blinde Kuh',
+            style: TextStyle(
+                fontFamily: "MineCraft",
+                color: Colors.black,
+                fontWeight: FontWeight.bold)),
+      ),
+      FortuneItem(
+        child: Text('Stille Post Extrem',
+            style: TextStyle(
+                fontFamily: "MineCraft",
+                color: Colors.black,
+                fontWeight: FontWeight.bold)),
+      ),
+      FortuneItem(
+        child: Text('Gangnam Style-Tanz',
+            style: TextStyle(
+                fontFamily: "MineCraft",
+                color: Colors.black,
+                fontWeight: FontWeight.bold)),
+      ),
     ];
-    final random = Random();
-    final selected =
-    fortuneItems.elementAt(random.nextInt(fortuneItems.length));
-    final selectedIndex = fortuneItems.toList().indexOf(selected);
-    controller.add(selectedIndex);
 
-    return FortuneWheel(
-        indicators: const <FortuneIndicator>[
-          FortuneIndicator(
-            alignment: Alignment.topCenter,
-            child:
-            CustomTriangleIndicator(height: 10, width: 60, notRotate: true),
-          ),
-        ],
-        items: fortuneItems,
-        styleStrategy: const UniformStyleStrategy(
-          color: Colors.black,
-          borderColor: Colors.white,
-          borderWidth: 2.0,
-        ),
-        onAnimationEnd: () {
-          // Rufen Sie den selected-Callback im Haupt-Widget auf, um die ausgewählte Person zu aktualisieren und das Popup anzuzeigen
-          widget.selected(
-              (fortuneItems.elementAt(selectedIndex).child as Text).data!);
-        });
+    return StreamBuilder<int>(
+      stream: controller.stream,
+      initialData: 0,
+      builder: (context, snapshot) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 350,
+              width: double.infinity,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  FortuneWheel(
+                    indicators: [],
+                    items: fortuneItems,
+                    selected: controller.stream,
+                    styleStrategy: const UniformStyleStrategy(
+                      color: Color.fromRGBO(218, 102, 81, 1.0),
+                      borderColor: Colors.black,
+                      borderWidth: 2.0,
+                    ),
+                    onAnimationEnd: () {
+                      widget.selected((fortuneItems.elementAt(snapshot.data!).child as Text).data!);
+                    },
+                  ),
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                      margin: EdgeInsets.only(top: 16),
+                      child: Icon(Icons.arrow_drop_down, size: 32),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 50),
+            ElevatedButton(
+              onPressed: () {
+                final selectedIndex = random.nextInt(fortuneItems.length);
+                controller.add(selectedIndex);
+              },
+              child: Icon(Icons.play_arrow),
+            ),
+          ],
+        );
+      },
+    );
   }
 }
