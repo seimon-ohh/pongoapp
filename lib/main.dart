@@ -62,7 +62,7 @@ class BeerPongApp extends StatelessWidget {
 
         body: Stack(
           children: [
-            //AudioPlayer(),
+            AudioPlayer(),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
